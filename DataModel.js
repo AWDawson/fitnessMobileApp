@@ -18,7 +18,6 @@ class DataModel {
     AV.init(config);
 
 
-
     this.usersRef = firebase.firestore().collection('users');
     this.chatsRef = firebase.firestore().collection('chats');
     this.storageRef = firebase.storage().ref();
@@ -27,7 +26,7 @@ class DataModel {
     this.currentUser = {};
     this.exerciseRecords = [];
     this.foodRecords = [];
-
+    this.dailyStats = [];
 
     this.chats = [];
     this.chatListeners = [];
@@ -37,17 +36,36 @@ class DataModel {
   asyncInit = async () => {
     this.loadUsers();
     this.loadChats();
+    await this.loadDailyStats();
+    console.log("DailyStats loaded successfully!");
     //this.subscribeToChats();
   }
 
-  loadUsers = async () => {
-    let querySnap = await this.usersRef.get();
-    querySnap.forEach(qDocSnap => {
-      let key = qDocSnap.id;
-      let data = qDocSnap.data();
-      data.key = key;
-      this.users.push(data);
+  loadDailyStats = async () => {
+    const query = new AV.Query('Daily_Stats');
+    let lists = await query.find();
+    console.log('loadDailyStats - the result of query.find() is:', lists);
+    lists.forEach(record => {
+      this.dailyStats.push(record.toJSON());
     });
+  }
+
+  loadUsers = async () => {
+    // let querySnap = await this.usersRef.get();
+    // querySnap.forEach(qDocSnap => {
+    //   let key = qDocSnap.id;
+    //   let data = qDocSnap.data();
+    //   data.key = key;
+    //   this.users.push(data);
+    // });
+
+    const query = new AV.Query('_User');
+    let lists = await query.find();
+    console.log('loadUser - the result of query.find() is:', lists);
+    lists.forEach(record => {
+      this.users.push(record.toJSON());
+    });
+    console.log('loadUser - Local model changed to:', this.users);
   }
 
   getUsers = () => {
@@ -75,30 +93,7 @@ class DataModel {
     await user.signUp();
     console.log(`注册成功。objectId：${user.id}`);
     console.log(user);
-    // user.signUp().then((user) => {
-    //   // 注册成功
-    //   console.log(`注册成功。objectId：${user.id}`);
-    // }, (error) => {
-    //   // 注册失败（通常是因为用户名已被使用）
-    // });
 
-    // assemble the data structure
-    // let newUser = {
-    //   email: email,
-    //   password: pass,
-    //   displayName: dispName,
-    //   gender: gender,
-    //   age: age,
-    //   weight: wt,
-    //   key: user.id,
-    // }
-    
-    // // add the data to Firebase (user collection)
-    // let newUserDocRef = await this.usersRef.add(newUser);
-
-    // // get the new Firebase ID and save it as the local "key"
-    // let key = newUserDocRef.id;
-    // newUser.key = key;
     this.users.push(user);
     return newUser;
   }

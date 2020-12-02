@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@leancloud/platform-adapters-react-native": "^0.5.0",
+    "@ovalmoney/react-native-fitness": "^0.5.1",
     "@react-native-community/async-storage": "1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.8.0",
@@ -16,6 +17,7 @@
     "expo": "~39.0.2",
     "expo-camera": "~9.0.0",
     "expo-permissions": "~9.3.0",
+    "expo-sensors": "~9.1.0",
     "expo-status-bar": "~1.0.2",
     "firebase": "7.9.0",
     "leancloud-storage": "^4.8.0",

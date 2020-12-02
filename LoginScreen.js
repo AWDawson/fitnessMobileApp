@@ -6,9 +6,13 @@ import { TextInput, Text, View,
 import { loginStyles } from './Styles';
 import { getDataModel } from './DataModel';
 
-import AV from 'leancloud-storage/core';
+import AV, { Query } from 'leancloud-storage/core';
 import * as adapters from '@leancloud/platform-adapters-react-native';
 import { config } from './leanCloudConfig'
+import Fitness from '@ovalmoney/react-native-fitness';
+import { Pedometer } from 'expo-sensors';
+
+
 
 export class LoginScreen extends React.Component {
   constructor(props) {
@@ -56,11 +60,11 @@ export class LoginScreen extends React.Component {
     });
   }
 
-  onLogin = () => {
-    AV.User.loginWithEmail(this.state.emailInput, this.state.passwordInput).then((user) => {
+  onLogin = async () => {
+    await AV.User.loginWithEmail(this.state.emailInput, this.state.passwordInput).then((user) => {
       // 登录成功
       console.log("Login Success");
-      this.dataModel.currentUser = user;
+      this.dataModel.currentUser = user.toJSON();
       console.log(user);
       // this.props.navigation.navigate("People", {
       //   currentUser: user
@@ -73,6 +77,62 @@ export class LoginScreen extends React.Component {
         [{ text: 'OK',style: 'OK'}]
       );
     });
+
+
+    // set interval for step counts
+    var start = new Date();
+    start.setHours(0,0,0,0);
+    var end = new Date();
+    end.setHours(23,59,59,999);
+
+    // get step count
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        console.log('Step counter:', result.steps);
+
+        // check if current user has today's daily stats record
+        var ifRecordExists = false;
+        for (let idx in this.dataModel.dailyStats) {
+          let item = this.dataModel.dailyStats[idx];
+          if (item.user.objectId === this.dataModel.currentUser.objectId && item.date === String(start)) {
+            ifRecordExists = true;
+            // update steps in local data model
+            this.dataModel.dailyStats[idx].steps = result.steps;
+            break;
+          }
+        }
+
+        if (ifRecordExists) {
+          // fetch the record
+          console.log("Record found");
+          var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
+          var query = new AV.Query('Daily_Stats').equalTo('date', String(start));
+          query.first().then((dailyRecord) => {
+            dailyRecord.set('steps', result.steps);
+            dailyRecord.save();
+          });
+        } else {
+          // create a new record
+          console.log("Record not found");
+          var dailyRecord = new AV.Object('Daily_Stats');
+          // 'user' is a pointer that points to the current user
+          var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
+          dailyRecord.set('user', user);
+          dailyRecord.set('date', String(start));
+          dailyRecord.set('steps', result.steps);
+          dailyRecord.set('calorie', 0);
+          dailyRecord.save();
+          console.log("dailyRecord saved");
+          this.dataModel.dailyStats.push(dailyRecord.toJSON());
+        }
+      },
+      error => {
+        Alert.alert(
+          'Could not get stepCount' + error,
+          [{ text: 'OK',style: 'OK'}]
+        );
+      }
+    );
 
     // let users = this.dataModel.getUsers();
     // let email = this.state.emailInput;
