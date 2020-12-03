@@ -36,7 +36,6 @@ class DataModel {
   asyncInit = async () => {
     this.loadUsers();
     await this.loadDailyStats();
-    await this.loadExercises();
     console.log("DailyStats loaded successfully!");
     //this.subscribeToChats();
   }
@@ -66,6 +65,21 @@ class DataModel {
     });
   }
 
+  loadFoodRecords = async () => {
+    let date = new Date();
+    date.setHours(0,0,0,0);
+
+    const query = new AV.Query('FoodRecords');
+    query.equalTo('UserId', AV.Object.createWithoutData('_User',this.currentUser.objectId));
+    query.greaterThanOrEqualTo('createdAt',date);
+
+    //const query = AV.Query.and(query1, query2);
+    let lists = await query.find();
+    lists.forEach(record => {
+      this.foodRecords.push(record.toJSON());
+    });
+  }
+
   loadUsers = async () => {
     // let querySnap = await this.usersRef.get();
     // querySnap.forEach(qDocSnap => {
@@ -89,7 +103,20 @@ class DataModel {
     let lists = await query.find();
     console.log('loadExercises - the result of query.find() is:', lists);
     lists.forEach(item => {
-      this.exercises[item.objectId] = item;
+      let i = item.toJSON();
+      console.log(i.objectId);
+      this.exercises[i.objectId] = i;
+    });
+  }
+
+  loadFoods = async () => {
+    const query = new AV.Query('Foods');
+    let lists = await query.find();
+    console.log('loadExercises - the result of query.find() is:', lists);
+    lists.forEach(item => {
+      let i = item.toJSON();
+      console.log(i.objectId);
+      this.foods[i.objectId] = i;
     });
   }
 

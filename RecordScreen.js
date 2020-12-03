@@ -11,10 +11,10 @@ export class RecordScreen extends React.Component {
     super(props);
 
     this.dataModel = getDataModel();
-    this.mode = this.props.route.params.mode;
 
     this.state = {
-      records: this.mode === 'exercise' ? this.dataModel.exerciseRecords : this.dataModel.foodRecords
+      records: this.props.route.params.mode === 'exercise' ? this.dataModel.exerciseRecords : this.dataModel.foodRecords,
+      mode: this.props.route.params.mode
     }
   }
 
@@ -30,18 +30,18 @@ export class RecordScreen extends React.Component {
             }}
             data={this.state.records}
             renderItem={({item})=> {
-              if (this.mode === 'exercise'){
+              if (this.state.mode === 'exercise'){
                 return (
                   <TouchableOpacity 
                     style={peopleStyles.personRow}
                     onPress={()=> {
-                      this.props.navigation.navigate('Chat', {
-                        currentUser: this.currentUser,
-                        otherUser: item
-                      });
+                      this.setState({mode : 'food',
+                      records:  this.dataModel.foodRecords});
                     }}
                   >
-                    <Text style={peopleStyles.personText}>{item.ExerciseId.objectId + "  " + item.Duration + "min"}</Text>
+                    <Text style={peopleStyles.personText}>{
+                    this.dataModel.exercises[item.ExerciseId.objectId].Type + "   Duration: " + item.Duration + "min" 
+                    }</Text>
                     <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
                   </TouchableOpacity>
                 );
@@ -50,13 +50,13 @@ export class RecordScreen extends React.Component {
                   <TouchableOpacity 
                     style={peopleStyles.personRow}
                     onPress={()=> {
-                      this.props.navigation.navigate('Chat', {
-                        currentUser: this.currentUser,
-                        otherUser: item
-                      });
+                      this.setState({mode : 'exercise',
+                      records: this.dataModel.exerciseRecords});
                     }}
                   >
-                    <Text style={peopleStyles.personText}>{item.Type}</Text>
+                    <Text style={peopleStyles.personText}>{
+                      this.dataModel.foods[item.FoodId.objectId].Type + "  Quantity: " + item.Quantity + ""
+                    }</Text>
                     <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
                   </TouchableOpacity>
                 );

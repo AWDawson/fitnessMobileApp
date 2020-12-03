@@ -87,7 +87,11 @@ export class LoginScreen extends React.Component {
     if (!success){
       return;
     }
+    await this.dataModel.loadExercises();
+    await this.dataModel.loadFoods();
     await this.dataModel.loadExerciseRecords();
+    await this.dataModel.loadFoodRecords();
+
 
     // set interval for step counts
     var start = new Date();
