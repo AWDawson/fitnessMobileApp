@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { LoginScreen } from './LoginScreen';
-import { PeopleScreen } from './PeopleScreen';
+import { RecordScreen } from './RecordScreen';
 import { ChatScreen } from './ChatScreen';
 import { CameraScreen } from './CameraScreen';
 
@@ -19,7 +19,7 @@ function App() {
         }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="People" component={PeopleScreen} />
+        <Stack.Screen name="Record" component={RecordScreen} />
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen name="Camera" component={CameraScreen} />
         
