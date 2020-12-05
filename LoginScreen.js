@@ -91,12 +91,13 @@ export class LoginScreen extends React.Component {
     await this.dataModel.loadExerciseRecords();
     await this.dataModel.loadFoodRecords();
 
+    await this.dataModel.loadDailyStats();
 
-    // // set interval for step counts
-    // var start = new Date();
-    // start.setHours(0,0,0,0);
-    // var end = new Date();
-    // end.setHours(23,59,59,999);
+    // set interval for step counts
+    var start = new Date();
+    start.setHours(0,0,0,0);
+    var end = new Date();
+    end.setHours(23,59,59,999);
 
     // // get step count
     // Pedometer.getStepCountAsync(start, end).then(
@@ -104,18 +105,11 @@ export class LoginScreen extends React.Component {
     //     console.log('Step counter:', result.steps);
 
     //     // check if current user has today's daily stats record
-    //     var ifRecordExists = false;
-    //     for (let idx in this.dataModel.dailyStats) {
-    //       let item = this.dataModel.dailyStats[idx];
-    //       if (item.user.objectId === this.dataModel.currentUser.objectId && item.date === String(start)) {
-    //         ifRecordExists = true;
-    //         // update steps in local data model
-    //         this.dataModel.dailyStats[idx].steps = result.steps;
-    //         break;
-    //       }
-    //     }
+    //     var ifRecordExists = this.currentUser.objectId in this.dailyStats;
 
     //     if (ifRecordExists) {
+    //       // update steps in local data model
+    //       this.dataModel.dailyStats[this.currentUser.objectId].steps = result.steps;
     //       // fetch the record
     //       console.log("Record found");
     //       var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
@@ -137,7 +131,7 @@ export class LoginScreen extends React.Component {
     //       dailyRecord.save();
     //       console.log("dailyRecord saved");
     //       let record = dailyRecord.toJSON();
-    //       this.dataModel.dailyStats[record.objectId] = record;
+    //       this.dataModel.dailyStats[this.currentUser.objectId] = record;
     //     }
     //   },
     //   error => {

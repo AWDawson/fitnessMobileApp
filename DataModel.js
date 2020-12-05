@@ -35,7 +35,6 @@ class DataModel {
 
   asyncInit = async () => {
     this.loadUsers();
-    await this.loadDailyStats();
     await this.loadExercises();
     await this.loadFoods();
     console.log("DailyStats loaded successfully!");
@@ -43,13 +42,18 @@ class DataModel {
   }
 
   loadDailyStats = async () => {
+    let date = new Date();
+    date.setHours(0,0,0,0);
+
     const query = new AV.Query('Daily_Stats');
+    query.greaterThanOrEqualTo('createdAt',date);
     let lists = await query.find();
-    console.log('loadDailyStats - the result of query.find() is:', lists);
+    
     lists.forEach(record => {
       let i = record.toJSON();
-      this.dailyStats[i.objectId] = i;
+      this.dailyStats[i.user.objectId] = i;
     });
+    console.log('loadDailyStats - the result of query.find() is:' + String(this.dailyStats));
   }
 
   loadExerciseRecords = async () => {
@@ -247,14 +251,8 @@ class DataModel {
     var start = new Date();
     start.setHours(0,0,0,0);
     let item;
-    let recordExists = false;
-    for (let idx in this.dailyStats) {
-        item = this.dailyStats[idx];
-        if (item.user.objectId === this.currentUser.objectId && item.date === String(start)) {
-          recordExists = true;
-          break;
-        }
-    }
+    let recordExists = this.currentUser.objectId in this.dailyStats;
+    
     if (!recordExists){
       item = new AV.Object('Daily_Stats');
       // 'user' is a pointer that points to the current user
@@ -263,7 +261,7 @@ class DataModel {
       item.set('date', String(start));
       item.set('steps', 0);
     } else {
-      item = AV.Object.createWithoutData('Daily_Stats', item.objectId);
+      item = AV.Object.createWithoutData('Daily_Stats', this.dailyStats[this.currentUser.objectId].objectId);
     }
     let calories = 0
     for (let record of Object.values(this.exerciseRecords)){
@@ -273,10 +271,13 @@ class DataModel {
       calories += record.Quantity * (1.0 * this.foods[record.FoodId.objectId].Calorie) ;
     }
 
+    console.log(recordExists);
+    console.log('calories cal: ' + calories);
+
     item.set('calorie',calories);
     await item.save().then((record) => {
-      let item = record.toJSON();
-      this.dailyStats[item.objectId] = item;
+      let i = record.toJSON();
+      this.dailyStats[this.currentUser.objectId] = i;
     });
   }
 
