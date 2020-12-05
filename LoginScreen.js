@@ -87,19 +87,18 @@ export class LoginScreen extends React.Component {
     if (!success){
       return;
     }
-    await this.dataModel.loadExercises();
-    await this.dataModel.loadFoods();
+    
     await this.dataModel.loadExerciseRecords();
     await this.dataModel.loadFoodRecords();
 
 
-    // set interval for step counts
-    var start = new Date();
-    start.setHours(0,0,0,0);
-    var end = new Date();
-    end.setHours(23,59,59,999);
+    // // set interval for step counts
+    // var start = new Date();
+    // start.setHours(0,0,0,0);
+    // var end = new Date();
+    // end.setHours(23,59,59,999);
 
-    // get step count
+    // // get step count
     // Pedometer.getStepCountAsync(start, end).then(
     //   result => {
     //     console.log('Step counter:', result.steps);
@@ -137,7 +136,8 @@ export class LoginScreen extends React.Component {
     //       dailyRecord.set('calorie', 0);
     //       dailyRecord.save();
     //       console.log("dailyRecord saved");
-    //       this.dataModel.dailyStats.push(dailyRecord.toJSON());
+    //       let record = dailyRecord.toJSON();
+    //       this.dataModel.dailyStats[record.objectId] = record;
     //     }
     //   },
     //   error => {

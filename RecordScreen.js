@@ -13,7 +13,7 @@ export class RecordScreen extends React.Component {
     this.dataModel = getDataModel();
 
     this.state = {
-      records: this.props.route.params.mode === 'exercise' ? this.dataModel.exerciseRecords : this.dataModel.foodRecords,
+      records: this.props.route.params.mode === 'exercise' ? Object.values(this.dataModel.exerciseRecords) : Object.values(this.dataModel.foodRecords),
       mode: this.props.route.params.mode
     }
   }
@@ -36,7 +36,7 @@ export class RecordScreen extends React.Component {
                     style={peopleStyles.personRow}
                     onPress={()=> {
                       this.setState({mode : 'food',
-                      records:  this.dataModel.foodRecords});
+                      records: Object.values(this.dataModel.foodRecords)});
                     }}
                   >
                     <Text style={peopleStyles.personText}>{
@@ -51,7 +51,7 @@ export class RecordScreen extends React.Component {
                     style={peopleStyles.personRow}
                     onPress={()=> {
                       this.setState({mode : 'exercise',
-                      records: this.dataModel.exerciseRecords});
+                      records: Object.values(this.dataModel.exerciseRecords)});
                     }}
                   >
                     <Text style={peopleStyles.personText}>{
