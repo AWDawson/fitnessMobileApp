@@ -28,7 +28,9 @@ export class LoginScreen extends React.Component {
       passwordCheckInput: '',
       genderInput:'',
       ageInput:'',
-      weightInput:''
+      weightInput:'',
+      heightInput:'',
+      activeTypeInput:'',
     }
   }
 
@@ -47,7 +49,9 @@ export class LoginScreen extends React.Component {
       this.state.displayNameInput,
       this.state.genderInput,
       this.state.ageInput,
-      this.state.weightInput
+      this.state.weightInput,
+      this.state.heightInput,
+      this.state.activeTypeInput
     );
     if (newUser === null){
       Alert.alert(
@@ -253,6 +257,43 @@ export class LoginScreen extends React.Component {
                 autoCorrect={false}
                 value={this.state.weightInput}
                 onChangeText={(text)=>{this.setState({weightInput: text})}}
+              />
+            </View>
+          ):(
+            <View/>
+          )}
+          {this.state.mode === 'create' ? (
+            <View style={loginStyles.inputRow}>
+              <Text style={loginStyles.inputLabel}>Height:</Text>
+              <TextInput
+                style={loginStyles.inputText}
+                autoCapitalize='none'
+                autoCorrect={false}
+                value={this.state.heightInput}
+                onChangeText={(text)=>{this.setState({heightInput: text})}}
+              />
+            </View>
+          ):(
+            <View/>
+          )}
+          {/* ActiveType tells you whether a user is active in sports
+              Implement a dropdown menu which user can select their types (accroding to the following fashion)
+              value: little or no exercise  ->  activeTypeInput: sedentary
+              value: light exercise/sports 1-3 days/week  ->  activeTypeInput: lightly active
+              value: moderate exercise/sports 3-5 days/week  ->  activeTypeInput: moderately active
+              value: hard exercise/sports 6-7 days a week  ->  activeTypeInput: very active
+              value: very hard exercise/sports & physical job or 2x training  ->  activeTypeInput: extra active
+
+          */}
+          {this.state.mode === 'create' ? (
+            <View style={loginStyles.inputRow}>
+              <Text style={loginStyles.inputLabel}>ActiveType:</Text>
+              <TextInput
+                style={loginStyles.inputText}
+                autoCapitalize='none'
+                autoCorrect={false}
+                value={this.state.activeTypeInput}
+                onChangeText={(text)=>{this.setState({activeTypeInput: text})}}
               />
             </View>
           ):(

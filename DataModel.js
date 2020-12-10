@@ -22,7 +22,7 @@ class DataModel {
     this.chatsRef = firebase.firestore().collection('chats');
     this.storageRef = firebase.storage().ref();
 
-    this.users = [];
+    this.users = {};
     this.currentUser = {};
     this.exercises = {};
     this.foods = {};
@@ -92,7 +92,9 @@ class DataModel {
     let lists = await query.find();
     //console.log('loadUser - the result of query.find() is:', lists);
     lists.forEach(record => {
-      this.users.push(record.toJSON());
+      // this.users.push(record.toJSON());
+      let i = record.toJSON();
+      this.users[i.objectId] = i;
     });
     //console.log('loadUser - Local model changed to:', this.users);
   }
@@ -123,7 +125,7 @@ class DataModel {
     return this.users;
   }
 
-  createUser = async (email, pass, dispName, gender, age, wt) => {
+  createUser = async (email, pass, dispName, gender, age, wt, ht, activeType) => {
 
     // 创建实例
     const user = new AV.User();
@@ -139,8 +141,10 @@ class DataModel {
     user.set('gender', gender);
     user.set('age', age);
     user.set('weight', wt);
-
-
+    user.set('height', ht);
+    user.set('activeType', activeType);
+    var recommendCalorie = this.calculateRecommendDailyCalorie(gender, age, wt, ht, activeType);
+    user.set('recommendCalorie', recommendCalorie);
     newUser = await user.signUp().then((user) => {
       // 注册成功
       console.log(`注册成功。objectId：${user.id}`);
@@ -153,13 +157,97 @@ class DataModel {
     return newUser;
   }
 
-  getUserForID = (id) => {
-    for (let user of this.users) {
-      if (user.key === id) {
-        return user;
-      }
+  updateUserProfile = async (userId, dispName, gender, age, wt, ht, activeType) => {
+    const user = AV.Object.createWithoutData('_User', userId);
+    user.set('age',  age);
+    user.set('gender', gender);
+    user.set('weight', wt);
+    user.set('height', ht);
+    user.set('username', dispName);
+    user.set('activeType', activeType);
+    var recommendCalorie = this.calculateRecommendDailyCalorie(gender, age, wt, ht, activeType);
+    user.set('recommendCalorie', recommendCalorie);
+    await user.save().then((updatedUser) => {
+      this.users.push(updatedUser.toJSON());
+      let thisUser = updatedUser.toJSON();
+      this.users[thisUser.objectId] = thisUser;
+      this.currentUser = updatedUser;
+    }, (error) => {
+      console.log(error)
+    });
+  }
+
+  /**
+   * The Basal Metabolic Rate (BMR) is the amount of energy 
+   * (calories) your body needs while resting. 
+   * This accounts for about 60 to 70 percent of calories burned in a day. 
+   * In general, men have a higher BMR than women. 
+   * The Mifflin-St Jeor Equation is considered the most accurate equation for calculating BMR 
+   * For men:   BMR = 10W + 6.25H - 5A + 5
+   * For women: BMR = 10W + 6.25H - 5A - 161
+   * where:
+      W is body weight in kg
+      H is body height in cm
+      A is age
+    To determine your total daily calorie needs, multiply your BMR by the appropriate activity factor, as follows:
+    sedentary (little or no exercise) : Calorie-Calculation = BMR x 1.2
+    lightly active (light exercise/sports 1-3 days/week) : Calorie-Calculation = BMR x 1.375
+    moderately active (moderate exercise/sports 3-5 days/week) : Calorie-Calculation = BMR x 1.55
+    very active (hard exercise/sports 6-7 days a week) : Calorie-Calculation = BMR x 1.725
+    extra active (very hard exercise/sports & physical job or 2x training) : Calorie-Calculation = BMR x 1.9
+   */
+  calculateRecommendDailyCalorie = (gender, age, wt, ht, activeType) => {
+    // let wtInLb = wt * 2.2046;
+    // let htInInch = ht * 39.3701;
+    var BMR = 0;
+    if (gender == 'male') {
+      BMR = 10 * wt + 6.25 * ht - 5 * age + 5;
+    } else{
+      BMR = 10 * wt + 6.25 * ht - 5 * age - 161;
     }
-    // will return undefined. No haiku this time...
+    switch(activeType) {
+      case 'sedentary':
+        BMR *= 1.2;
+        break;
+      case 'lightly active':
+        BMR *= 1.375;
+        break;
+      case 'moderately active':
+        BMR *= 1.55;
+        break;
+      case 'very active':
+        BMR *= 1.725;
+        break;
+      case 'extra active':
+        BMR *= 1.9
+        break;
+      default:
+        // if no record for activeType, assume lightly active
+        BMR *= 1.375;
+    }
+    return BMR;
+  }
+
+  /**
+   * output: a sorted list contains username and steps
+   * example: [['John',10000],['Steve', 8000],['Chris', 5000]]
+   */
+  getRankedList = () => {
+    // convert this.dailyStats to array and then sort based on steps
+    var sortable = [];
+    for (var id in this.dailyStats) {
+      var userId = this.dailyStats[id].user;
+      var username = this.users[userId];
+      sortable.push([username, this.dailyStats[id].steps]);
+    }
+    sortable.sort(function(a, b) {
+      return b[1] - a[1];
+    });
+    return sortable;
+  }
+
+  getUserForID = (id) => {
+    return this.users[id];
   }
 
   
