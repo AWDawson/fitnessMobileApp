@@ -1627,6 +1627,11 @@
   resolved "https://registry.npm.taobao.org/@react-native-community/masked-view/download/@react-native-community/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha1-XdpkPhnlh3k7wgNN2b9zmK1D1AE=
 
+"@react-native-picker/picker@^1.9.5":
+  version "1.9.5"
+  resolved "https://registry.npm.taobao.org/@react-native-picker/picker/download/@react-native-picker/picker-1.9.5.tgz#be015b124807db19e7a3675a585ef91a570e22dc"
+  integrity sha1-vgFbEkgH2xnno2daWF75GlcOItw=
+
 "@react-navigation/core@^5.14.4":
   version "5.14.4"
   resolved "https://registry.npm.taobao.org/@react-navigation/core/download/@react-navigation/core-5.14.4.tgz#f63a2cd214bddbd25e1181f9335c32dfc3b6460f"

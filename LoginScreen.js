@@ -324,7 +324,9 @@ export class LoginScreen extends React.Component {
             <TouchableOpacity 
               style={loginStyles.buttonContainerSignUp}
               onPress={()=>{
-                this.setState({mode: 'create'})
+                this.props.navigation.navigate("Signup", {
+                  mode:'create'
+                })
               }}
               >
               <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
