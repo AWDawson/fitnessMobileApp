@@ -10,6 +10,102 @@ export const colors = {
   outline: '#BDBDBD' // MD Gray 400
 }
 
+export const commonStyles = StyleSheet.create({
+  header:{
+    height: 100,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+    headerLeftIcon:{
+      width: 40,
+      height: 40,
+    },
+    headerRightIcon:{
+      width: 40,
+      height: 40,
+    },
+    headerText:{
+
+    },
+  icon:{
+
+  },
+});
+
+
+export const homeStyles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor: colors.exercise,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white'
+    // paddingTop: 80
+  },
+  middle:{
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+    suggestion:{
+      color: 'white'
+
+    },
+    suggestedCal:{
+      color: 'white'
+
+    },
+    meter:{
+
+    },
+      ellipse:{
+
+      },
+      meterValue:{
+
+      },
+      meterText:{
+        color: 'white'
+
+      },
+    list:{
+
+    },
+      listTitle:{
+        color: 'white'
+
+      },
+      listButton:{
+        color: 'white'
+
+      },
+      listContainer:{
+
+      },
+    addButton:{
+
+    },
+    addIcon:{
+
+    },
+    addText:{
+      color: 'white'
+
+    },
+  bottom:{
+
+  },
+    normalButton:{
+
+    },
+    exerciseButton:{
+
+    },
+    mealButton:{
+
+    }
+});
 
 export const loginStyles = StyleSheet.create({
   container: {
@@ -128,7 +224,7 @@ export const loginStyles = StyleSheet.create({
 export const peopleStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00D0BD',
+    backgroundColor: colors.exercise,
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 20

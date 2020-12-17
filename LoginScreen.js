@@ -62,7 +62,7 @@ export class LoginScreen extends React.Component {
       return;
     }
 
-    this.props.navigation.navigate("Record", {
+    this.props.navigation.navigate("Home", {
       currentUser: newUser,
       mode: "exercise"
     });
@@ -94,7 +94,6 @@ export class LoginScreen extends React.Component {
     
     await this.dataModel.loadExerciseRecords();
     await this.dataModel.loadFoodRecords();
-
     await this.dataModel.loadDailyStats();
 
     // set interval for step counts
@@ -146,7 +145,7 @@ export class LoginScreen extends React.Component {
     //   }
     // );
 
-    this.props.navigation.navigate("Record", {
+    this.props.navigation.navigate("Home", {
         mode: "exercise"
     });
     

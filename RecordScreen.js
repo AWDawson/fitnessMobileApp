@@ -16,6 +16,8 @@ export class RecordScreen extends React.Component {
       records: this.props.route.params.mode === 'exercise' ? Object.values(this.dataModel.exerciseRecords) : Object.values(this.dataModel.foodRecords),
       mode: this.props.route.params.mode
     }
+
+    
   }
 
   render() {
