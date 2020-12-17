@@ -11,6 +11,13 @@ export const colors = {
 }
 
 export const commonStyles = StyleSheet.create({
+  commonContainer:{
+    flex: 1,
+    backgroundColor: colors.exercise,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white'
+  },
   header:{
     height: 80,
     width:'90%',
@@ -30,7 +37,13 @@ export const commonStyles = StyleSheet.create({
       height: 40,
     },
     headerText:{
-
+      width: "100%",
+      textAlign:'center',
+      position:'absolute',
+      fontSize: 20,
+      color:"white",
+      fontWeight: '700',
+      paddingBottom: 8,
     },
   icon:{
 
@@ -38,14 +51,28 @@ export const commonStyles = StyleSheet.create({
 });
 
 
-export const homeStyles = StyleSheet.create({
-  exerciseContainer:{
-    flex: 1,
-    backgroundColor: colors.exercise,
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white'
+export const rankingStyles = StyleSheet.create({
+  header:{
+    height: 80,
+    width:'90%',
+    // paddingTop:
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-start',
   },
+
+})
+
+export const homeStyles = StyleSheet.create({
+  header:{
+    height: 80,
+    width:'90%',
+    // paddingTop:
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+  },
+
   foodContainer:{
     flex: 1,
     backgroundColor: colors.food,

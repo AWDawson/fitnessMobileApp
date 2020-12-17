@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextInput, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
-import { peopleStyles, colors } from './Styles';
+import { TextInput, Text, View, FlatList, TouchableOpacity, Alert , Image} from 'react-native';
+import { peopleStyles, colors, commonStyles, rankingStyles } from './Styles';
 import { getDataModel } from './DataModel';
 
 export class RankingScreen extends React.Component {
@@ -16,8 +16,23 @@ export class RankingScreen extends React.Component {
   
     render() {
       return (
-        <View style={peopleStyles.container}>
-          <View style={peopleStyles.peopleListContainer}>
+        <View style={commonStyles.commonContainer}>
+          <View style={rankingStyles.header}>
+                <Text style={commonStyles.headerText}>
+                  Exercise Ranking
+                </Text>
+                <TouchableOpacity
+                    style={commonStyles.headerLeftIcon}
+                    onPress={()=>{
+                        this.props.navigation.navigate("Home");                    
+                    }}
+                >
+                <Image 
+                    source={require('./assets/back.png')}
+                    style={commonStyles.headerLeftIcon}
+                />                
+                </TouchableOpacity>
+          </View>
             <FlatList
               ItemSeparatorComponent={()=>{
                 return (
@@ -25,16 +40,16 @@ export class RankingScreen extends React.Component {
                 );
               }}
               data={this.state.rankedList}
-              renderItem={({item})=> {
-                  return (
-                      <Text style={peopleStyles.personText}>
-                        { item[0] + ' ' + item[1] } 
-                      </Text>
-                  );
-                }}
+              renderItem={({item, index})=> {
+                index += 1;
+                return (
+                    <Text style={peopleStyles.personText}>
+                      {index + item[0] + ' ' + item[1] } 
+                    </Text>
+                );
+              }}
             />
           </View>
-        </View>
       )
     }
   }

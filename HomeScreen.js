@@ -22,9 +22,9 @@ export class HomeScreen extends React.Component {
 
   render() {
     return (
-        <View style={this.state.mode === 'exercise' ? homeStyles.exerciseContainer:homeStyles.foodContainer}>
-            <View style={commonStyles.header}>
-                <TouchableOpacity 
+        <View style={this.state.mode === 'exercise' ? commonStyles.commonContainer:homeStyles.foodContainer}>
+            <View style={homeStyles.header}>
+                <TouchableOpacity
                     style={commonStyles.headerLeftIcon}
                     onPress={()=>{
                         this.props.navigation.navigate("User");                    
