@@ -25,10 +25,11 @@ export class RankingScreen extends React.Component {
                 );
               }}
               data={this.state.rankedList}
-              renderItem={({item})=> {
+              renderItem={({item, index})=> {
+                  index += 1;
                   return (
                       <Text style={peopleStyles.personText}>
-                        { item[0] + ' ' + item[1] } 
+                        {index + item[0] + ' ' + item[1] } 
                       </Text>
                   );
                 }}
