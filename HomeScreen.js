@@ -3,6 +3,8 @@ import {  Text, View, Image, TouchableOpacity}  from 'react-native';
 import { homeStyles, commonStyles} from './Styles';
 import { getDataModel } from './DataModel';
 import { FlatList } from 'react-native-gesture-handler';
+import InsetShadow from 'react-native-inset-shadow'
+
 
 export class HomeScreen extends React.Component {
   constructor(props) {
@@ -49,12 +51,15 @@ export class HomeScreen extends React.Component {
             </View>
 
             <View style={homeStyles.middle}>
-                <Text style={homeStyles.suggestion}>
-                    We recommend you intake
-                </Text>
-                <Text style={homeStyles.suggestion}>
-                    {this.state.suggestedCal} kCal per day.
-                </Text>
+                <View style={homeStyles.suggestion}>
+                    <Text style={homeStyles.suggestionText}>
+                        We recommend you intake
+                    </Text>
+                    <Text style={homeStyles.suggestionText}>
+                        {this.state.suggestedCal} kCal per day.
+                    </Text>
+                </View>
+
 
                 <View style={homeStyles.meter}>
                     <Image 
@@ -63,7 +68,7 @@ export class HomeScreen extends React.Component {
                     />
 
                     <Text style={homeStyles.meterValue}>
-                        100 {this.state.calories}
+                        100{this.state.calories}
                     </Text>
 
                     <Text style={homeStyles.meterText}>
@@ -71,21 +76,23 @@ export class HomeScreen extends React.Component {
                     </Text>
                 </View>
 
-                <View style={homeStyles.list}>
-                    <Text style={homeStyles.listTitle}>
-                        Recent
-                    </Text>
-
-                    <TouchableOpacity 
-                        style={homeStyles.listButton}
-                        onPress={()=>{
-                            this.props.navigation.navigate("Record");                    
-                        }}
-                    >
-                        <Text style={homeStyles.listButton}>
-                            See All
+                <View style={homeStyles.list}>  
+                    <View style={homeStyles.listHeader}>
+                        <Text style={homeStyles.listTitle}>
+                            Recent
                         </Text>
-                    </TouchableOpacity>
+
+                        <TouchableOpacity 
+                            style={homeStyles.listButton}
+                            onPress={()=>{
+                                this.props.navigation.navigate("Record");                    
+                            }}
+                        >
+                            <Text style={homeStyles.listButton}>
+                                See All
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
 
                     <View style={homeStyles.listContainer}>
                         <FlatList>
@@ -112,21 +119,23 @@ export class HomeScreen extends React.Component {
             </View>
 
             <View style={homeStyles.bottom}>
+                    <InsetShadow>
+                        <TouchableOpacity 
+                            style= {this.state.mode === 'exercise' ? homeStyles.normalButton:homeStyles.exerciseActivateButton}
+                            onPress={()=>{
+                                this.setState({
+                                    mode: 'exercise'
+                                });                    
+                            }}
+                        >
+                        <Image 
+                            source={require('./assets/exercise.png')}
+                            style={homeStyles.buttomIcon}
+                        />
+                        </TouchableOpacity>
+                    </InsetShadow>
                     <TouchableOpacity 
-                        style= {this.state.mode === 'exercise' ? homeStyles.normalButton:homeStyles.exerciseButton}
-                        onPress={()=>{
-                            this.setState({
-                                mode: 'exercise'
-                            });                    
-                        }}
-                    >
-                    <Image 
-                        source={require('./assets/exercise.png')}
-                        style={homeStyles.buttomIcon}
-                    />
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style= {this.state.mode === 'meal' ? homeStyles.normalButton:homeStyles.mealButton}
+                        style= {this.state.mode === 'meal' ? homeStyles.normalButton:homeStyles.mealActivateButton}
                         onPress={()=>{
                             this.setState({
                                 mode: 'meal'

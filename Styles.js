@@ -48,21 +48,25 @@ export const homeStyles = StyleSheet.create({
     // paddingTop: 80
   },
   middle:{
-    paddingTop: 100,
+    paddingTop: 20,
     flex: 70,
     alignItems: 'center',
     justifyContent: 'center',
   },
     suggestion:{
+      flex: 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    suggestionText:{
       color: 'white',
       fontSize: 16,
       opacity: 0.8
     },
-    suggestedCal:{
-      color: 'white',
-    },
     meter:{
-      top: 50,
+      paddingTop: 30,
+      flex: 8,
+      // top: 50,
       position:'relative',
       // height: 500
     },
@@ -77,19 +81,29 @@ export const homeStyles = StyleSheet.create({
         color: 'white',
         position:'absolute',
         alignSelf: 'center',
+        fontWeight: '500',
         fontSize: 90,
-        
+        top: 40
       },
       meterText:{
         color: 'white',
         position:'absolute',
         alignSelf: 'center',
-        fontSize: 60,
-
+        fontWeight: '500',
+        fontSize: 50,
+        top: 135
       },
     list:{
-
+      flex: 3,
+      width:'90%',
     },
+      listHeader:{
+        // width:'100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+      },
       listTitle:{
         color: 'white'
 
@@ -102,6 +116,7 @@ export const homeStyles = StyleSheet.create({
 
       },
     addButton:{
+      flex: 2,
 
     },
     addIcon:{
@@ -112,19 +127,32 @@ export const homeStyles = StyleSheet.create({
 
     },
   bottom:{
-    flex:18,
+    width:'100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+    buttomIcon:{
+      marginTop:15,
+      marginBottom:15,
+      alignSelf:'center'
+    },
     normalButton:{
-
+      width:'50%'
     },
-    exerciseButton:{
-
+    exerciseActivateButton:{
+      width:'50%',
+      backgroundColor:colors.exercise,
+      borderTopRightRadius: 20,
     },
-    mealButton:{
-
+    mealActivateButton:{
+      width:'50%',
+      backgroundColor:colors.food,
+      borderTopLeftRadius: 20,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
     }
 });
 
