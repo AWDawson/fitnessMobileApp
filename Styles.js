@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { color } from 'react-native-reanimated';
 
 export const colors = {
+  exercise: '#00D0BD',
+  food: '#DD42B2',
   primary: '#7986CB', // MD Amber 500
   primaryDark: '#303F9F', // MD Brown 300
   primaryLight: '#E8EAF6', // MD Amber 200
@@ -11,13 +14,13 @@ export const colors = {
 export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.exercise,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 20
+    paddingTop: 80
   },
     topView: {
-      flex: 0.3,
+      height: 100,
       alignItems: 'center',
       justifyContent: 'flex-end',
       width: '100%',
@@ -25,64 +28,107 @@ export const loginStyles = StyleSheet.create({
       logoImage: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: '50%',
-        height: '50%',
+        width: 120,
+        height: 120,
         resizeMode: 'contain',
       },
+      title:{
+        color: 'white',
+        fontSize: 28,
+        fontWeight: 'bold',
+        paddingTop: 20,
+      },
+      des:{
+        color: 'white',
+        opacity: 0.8,
+        fontSize: 18,
+        paddingTop: 10,
+
+      },
     middleView: {
-      flex: 0.4,
+      height: 160,
+      // flex: 0.3,
       justifyContent: 'center',
       alignItems: 'center',
-      width: '100%',
-      //backgroundColor: 'lightgreen'
+      width: '80%',
+      backgroundColor: 'white',
+      opacity: 0.6,
+      borderRadius:20,
+      marginTop: 30,
+      marginBottom: 30,
     },
       inputRow: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingVertical: 15
+        paddingVertical: 16,
+        // borderBottomWidth: 2,
+        width: '90%',
+        // borderColor: colors.exercise
       },
+        inputLabelPic:{
+          width: 35,
+          height: 35,
+          // marginRight: 10,
+        },
         inputLabel: {
           flex: 0.3,
           justifyContent: 'flex-end',
           paddingRight: 5,
           textAlign: 'right',
-          fontSize: 10
+          fontSize: 20
         },
         inputText: {
-          flex: 0.5,
+          flex: 0.8,
           borderColor: colors.outline,
-          paddingLeft: 5,
+          // marginLeft: 0,
           borderBottomWidth: 1,
           fontSize: 18,
         },
       bottomView: {
-        flex: 0.3,
-        flexDirection: 'row',
+        height: 120,
+        flexDirection: 'column',
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'flex-start'
+        alignItems: 'center'
       },
-        buttonContainer: {
+      buttonContainerLogIn: {
           justifyContent: 'center',
           alignItems: 'center',
-          borderWidth: 1,
-          borderColor: colors.outline,
-          borderRadius: 6,
-          backgroundColor: colors.primary,
-          width: 100,
-          height: 50
+          borderWidth: 3,
+          borderColor: 'white',
+          borderRadius: 30,
+          // backgroundColor: colors.primary,
+          width: 300,
+          height: 65
         },
-          buttonText: {
+        buttonContainerSignUp: {
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 30,
+          backgroundColor: 'white',
+          width: 300,
+          height: 65,
+          marginTop: 10,
+        },
+        buttonTextLogIn: {
             textAlign: 'center',
-            color: 'white'
+            color: 'white',
+            fontSize: 20,
+            fontWeight: 'bold'
+          },
+          buttonTextSignUp: {
+            textAlign: 'center',
+            color: colors.exercise,
+            fontSize: 20,
+            fontWeight: 'bold'
           }
 });
 
 export const peopleStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#00D0BD',
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 20
@@ -115,7 +161,7 @@ export const peopleStyles = StyleSheet.create({
 export const chatStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#00D0BD',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
