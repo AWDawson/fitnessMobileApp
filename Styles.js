@@ -12,16 +12,20 @@ export const colors = {
 
 export const commonStyles = StyleSheet.create({
   header:{
-    height: 100,
+    height: 80,
+    width:'90%',
+    // paddingTop:
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
   },
     headerLeftIcon:{
+      // paddingLeft:20,
       width: 40,
       height: 40,
     },
     headerRightIcon:{
+      // paddingRight:20,
       width: 40,
       height: 40,
     },
@@ -44,29 +48,43 @@ export const homeStyles = StyleSheet.create({
     // paddingTop: 80
   },
   middle:{
-    height: 100,
+    paddingTop: 100,
+    flex: 70,
     alignItems: 'center',
     justifyContent: 'center',
   },
     suggestion:{
-      color: 'white'
-
+      color: 'white',
+      fontSize: 16,
+      opacity: 0.8
     },
     suggestedCal:{
-      color: 'white'
-
+      color: 'white',
     },
     meter:{
-
+      top: 50,
+      position:'relative',
+      // height: 500
     },
       ellipse:{
-
+        position:'absolute',
+        alignSelf: 'center',
+        width: 230,
+        height: 230,
+        resizeMode: 'contain',
       },
       meterValue:{
-
+        color: 'white',
+        position:'absolute',
+        alignSelf: 'center',
+        fontSize: 90,
+        
       },
       meterText:{
-        color: 'white'
+        color: 'white',
+        position:'absolute',
+        alignSelf: 'center',
+        fontSize: 60,
 
       },
     list:{
@@ -94,7 +112,10 @@ export const homeStyles = StyleSheet.create({
 
     },
   bottom:{
-
+    flex:18,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
     normalButton:{
 
@@ -111,15 +132,15 @@ export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.exercise,
+    flexDirection:'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 80
+    // paddingTop: 80
   },
     topView: {
-      height: 100,
+      flex:3.8,
       alignItems: 'center',
       justifyContent: 'flex-end',
-      width: '100%',
     },
       logoImage: {
         alignItems: 'center',
@@ -139,10 +160,9 @@ export const loginStyles = StyleSheet.create({
         opacity: 0.8,
         fontSize: 18,
         paddingTop: 10,
-
       },
     middleView: {
-      height: 160,
+      flex: 2,
       // flex: 0.3,
       justifyContent: 'center',
       alignItems: 'center',
@@ -151,7 +171,7 @@ export const loginStyles = StyleSheet.create({
       opacity: 0.6,
       borderRadius:20,
       marginTop: 30,
-      marginBottom: 30,
+      marginBottom: 10,
     },
       inputRow: {
         flexDirection: 'row',
@@ -182,9 +202,9 @@ export const loginStyles = StyleSheet.create({
           fontSize: 18,
         },
       bottomView: {
-        height: 120,
+        marginBottom:30,
+        flex:2,
         flexDirection: 'column',
-        width: '100%',
         justifyContent: 'center',
         alignItems: 'center'
       },

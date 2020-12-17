@@ -155,8 +155,8 @@ export class LoginScreen extends React.Component {
     return (
       <KeyboardAvoidingView 
         style={loginStyles.container}
-        behavior={"height"}
-        keyboardVerticalOffset={10}>
+        behavior={'position'}
+        keyboardVerticalOffset={0}>
           {this.state.mode === 'login' ? (
             <View style={loginStyles.topView}>
               <Image 
