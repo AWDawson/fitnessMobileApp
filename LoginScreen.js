@@ -116,7 +116,7 @@ export class LoginScreen extends React.Component {
           // fetch the record
           console.log("Record found");
           var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
-          var query = new AV.Query('Daily_Stats').equalTo('date', String(start));
+          var query = new AV.Query('Daily_Stats').equalTo('date', String(start)).equalTo('user', user);
           query.first().then((dailyRecord) => {
             dailyRecord.set('steps', result.steps);
             dailyRecord.save();
@@ -324,7 +324,9 @@ export class LoginScreen extends React.Component {
             <TouchableOpacity 
               style={loginStyles.buttonContainerSignUp}
               onPress={()=>{
-                this.setState({mode: 'create'})
+                this.props.navigation.navigate("Signup", {
+                  mode:'create'
+                })
               }}
               >
               <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>

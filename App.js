@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { SignupScreen } from './SignupScreen'
 import { LoginScreen } from './LoginScreen';
 import { RecordScreen } from './RecordScreen';
 import { ChatScreen } from './ChatScreen';
@@ -26,6 +26,8 @@ function App() {
         <Stack.Screen name="Camera" component={CameraScreen} />
         <Stack.Screen name="Ranking" component={RankingScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
