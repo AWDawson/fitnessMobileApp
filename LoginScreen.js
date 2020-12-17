@@ -102,48 +102,48 @@ export class LoginScreen extends React.Component {
     var end = new Date();
     end.setHours(23,59,59,999);
 
-    // // get step count
-    // Pedometer.getStepCountAsync(start, end).then(
-    //   result => {
-    //     console.log('Step counter:', result.steps);
+    // get step count
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        console.log('Step counter:', result.steps);
 
-    //     // check if current user has today's daily stats record
-    //     var ifRecordExists = this.currentUser.objectId in this.dailyStats;
+        // check if current user has today's daily stats record
+        var ifRecordExists = this.dataModel.currentUser.objectId in this.dataModel.dailyStats;
 
-    //     if (ifRecordExists) {
-    //       // update steps in local data model
-    //       this.dataModel.dailyStats[this.currentUser.objectId].steps = result.steps;
-    //       // fetch the record
-    //       console.log("Record found");
-    //       var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
-    //       var query = new AV.Query('Daily_Stats').equalTo('date', String(start));
-    //       query.first().then((dailyRecord) => {
-    //         dailyRecord.set('steps', result.steps);
-    //         dailyRecord.save();
-    //       });
-    //     } else {
-    //       // create a new record
-    //       console.log("Record not found");
-    //       var dailyRecord = new AV.Object('Daily_Stats');
-    //       // 'user' is a pointer that points to the current user
-    //       var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
-    //       dailyRecord.set('user', user);
-    //       dailyRecord.set('date', String(start));
-    //       dailyRecord.set('steps', result.steps);
-    //       dailyRecord.set('calorie', 0);
-    //       dailyRecord.save();
-    //       console.log("dailyRecord saved");
-    //       let record = dailyRecord.toJSON();
-    //       this.dataModel.dailyStats[this.currentUser.objectId] = record;
-    //     }
-    //   },
-    //   error => {
-    //     Alert.alert(
-    //       'Could not get stepCount' + error,
-    //       [{ text: 'OK',style: 'OK'}]
-    //     );
-    //   }
-    // );
+        if (ifRecordExists) {
+          // update steps in local data model
+          this.dataModel.dailyStats[this.dataModel.currentUser.objectId].steps = result.steps;
+          // fetch the record
+          console.log("Record found");
+          var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
+          var query = new AV.Query('Daily_Stats').equalTo('date', String(start));
+          query.first().then((dailyRecord) => {
+            dailyRecord.set('steps', result.steps);
+            dailyRecord.save();
+          });
+        } else {
+          // create a new record
+          console.log("Record not found");
+          var dailyRecord = new AV.Object('Daily_Stats');
+          // 'user' is a pointer that points to the current user
+          var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
+          dailyRecord.set('user', user);
+          dailyRecord.set('date', String(start));
+          dailyRecord.set('steps', result.steps);
+          dailyRecord.set('calorie', 0);
+          dailyRecord.save();
+          console.log("dailyRecord saved");
+          let record = dailyRecord.toJSON();
+          this.dataModel.dailyStats[this.dataModel.currentUser.objectId] = record;
+        }
+      },
+      error => {
+        // Alert.alert(
+        //   'Could not get stepCount' + error,
+        //   [{ text: 'OK',style: 'OK'}]
+        // );
+      }
+    );
 
     this.props.navigation.navigate("Home", {
         mode: "exercise"

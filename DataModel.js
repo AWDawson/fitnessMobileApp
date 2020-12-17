@@ -236,13 +236,14 @@ class DataModel {
     // convert this.dailyStats to array and then sort based on steps
     var sortable = [];
     for (var id in this.dailyStats) {
-      var userId = this.dailyStats[id].user;
-      var username = this.users[userId];
+      var userId = this.dailyStats[id].user.objectId;
+      var username = this.users[userId].username;
       sortable.push([username, this.dailyStats[id].steps]);
     }
     sortable.sort(function(a, b) {
       return b[1] - a[1];
     });
+    console.log(sortable);
     return sortable;
   }
 
