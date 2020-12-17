@@ -22,7 +22,7 @@ export class HomeScreen extends React.Component {
 
   render() {
     return (
-        <View style={homeStyles.container}>
+        <View style={this.state.mode === 'exercise' ? homeStyles.exerciseContainer:homeStyles.foodContainer}>
             <View style={commonStyles.header}>
                 <TouchableOpacity 
                     style={commonStyles.headerLeftIcon}
@@ -119,21 +119,19 @@ export class HomeScreen extends React.Component {
             </View>
 
             <View style={homeStyles.bottom}>
-                    <InsetShadow>
-                        <TouchableOpacity 
-                            style= {this.state.mode === 'exercise' ? homeStyles.normalButton:homeStyles.exerciseActivateButton}
-                            onPress={()=>{
-                                this.setState({
-                                    mode: 'exercise'
-                                });                    
-                            }}
-                        >
-                        <Image 
-                            source={require('./assets/exercise.png')}
-                            style={homeStyles.buttomIcon}
-                        />
-                        </TouchableOpacity>
-                    </InsetShadow>
+                    <TouchableOpacity 
+                        style= {this.state.mode === 'exercise' ? homeStyles.normalButton:homeStyles.exerciseActivateButton}
+                        onPress={()=>{
+                            this.setState({
+                                mode: 'exercise'
+                            });                    
+                        }}
+                    >
+                    <Image 
+                        source={require('./assets/exercise.png')}
+                        style={homeStyles.buttomIcon}
+                    />
+                    </TouchableOpacity>
                     <TouchableOpacity 
                         style= {this.state.mode === 'meal' ? homeStyles.normalButton:homeStyles.mealActivateButton}
                         onPress={()=>{

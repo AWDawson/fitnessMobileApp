@@ -39,9 +39,16 @@ export const commonStyles = StyleSheet.create({
 
 
 export const homeStyles = StyleSheet.create({
-  container:{
+  exerciseContainer:{
     flex: 1,
     backgroundColor: colors.exercise,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white'
+  },
+  foodContainer:{
+    flex: 1,
+    backgroundColor: colors.food,
     alignItems: 'center',
     justifyContent: 'center',
     color: 'white'
@@ -73,8 +80,8 @@ export const homeStyles = StyleSheet.create({
       ellipse:{
         position:'absolute',
         alignSelf: 'center',
-        width: 230,
-        height: 230,
+        width: 200,
+        height: 200,
         resizeMode: 'contain',
       },
       meterValue:{
@@ -82,7 +89,7 @@ export const homeStyles = StyleSheet.create({
         position:'absolute',
         alignSelf: 'center',
         fontWeight: '500',
-        fontSize: 90,
+        fontSize: 80,
         top: 40
       },
       meterText:{
@@ -90,8 +97,8 @@ export const homeStyles = StyleSheet.create({
         position:'absolute',
         alignSelf: 'center',
         fontWeight: '500',
-        fontSize: 50,
-        top: 135
+        fontSize: 40,
+        top: 125
       },
     list:{
       flex: 3,
@@ -116,14 +123,29 @@ export const homeStyles = StyleSheet.create({
 
       },
     addButton:{
-      flex: 2,
+      margin: 20,
+      height: 53,
+      flexDirection:'row',
+      width: 350,
+      alignItems: 'center',
+      borderWidth: 3,
+      borderColor: 'white',
+      borderRadius: 20,
+      justifyContent: 'center',
 
     },
     addIcon:{
-
+      // position:'absolute',
+      marginRight: 20,
+      width: 40,
+      height: 40,
     },
     addText:{
-      color: 'white'
+      color: 'white',
+      fontSize: 20,
+      fontWeight: "700",
+      // alignSelf: 'flex-end'
+
 
     },
   bottom:{
@@ -138,21 +160,25 @@ export const homeStyles = StyleSheet.create({
       alignSelf:'center'
     },
     normalButton:{
-      width:'50%'
+      width:'50%',
     },
     exerciseActivateButton:{
       width:'50%',
       backgroundColor:colors.exercise,
       borderTopRightRadius: 20,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.8,
+      shadowRadius: 3,
     },
     mealActivateButton:{
       width:'50%',
       backgroundColor:colors.food,
       borderTopLeftRadius: 20,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
+      shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.8,
-      shadowRadius: 2,
+      shadowRadius: 3,
     }
 });
 
