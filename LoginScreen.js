@@ -158,17 +158,25 @@ export class LoginScreen extends React.Component {
         style={loginStyles.container}
         behavior={"height"}
         keyboardVerticalOffset={10}>
-        <View style={loginStyles.topView}>
-          <Image 
-            source={require('./assets/logo.png')}
-            style={loginStyles.logoImage}
-          />
-        </View>
+          {this.state.mode === 'login' ? (
+            <View style={loginStyles.topView}>
+              <Image 
+                source={require('./assets/logo.png')}
+                style={loginStyles.logoImage}
+              />
+              <Text style={loginStyles.title}>Calories</Text>
+              <Text style={loginStyles.des}>Your personal calories daily tracker.</Text>
+            </View>
+          ):(
+            <View/>
+          )}
         <View style={loginStyles.middleView}>
+
           <View style={loginStyles.inputRow}>
-            <Text 
-              style={loginStyles.inputLabel}
-            >Email:</Text>
+            <Image 
+              source={require('./assets/email.png')}
+              style={loginStyles.inputLabelPic}
+            />
             <TextInput
               style={loginStyles.inputText}
               keyboardType='email-address'
@@ -195,8 +203,11 @@ export class LoginScreen extends React.Component {
             <View/>
           )}
           <View style={loginStyles.inputRow}>
-            <Text style={loginStyles.inputLabel}>Password:</Text>
-            <TextInput
+          <Image 
+              source={require('./assets/password.png')}
+              style={loginStyles.inputLabelPic}
+            />
+          <TextInput
               style={loginStyles.inputText}
               autoCapitalize='none'
               autoCorrect={false}
@@ -300,23 +311,26 @@ export class LoginScreen extends React.Component {
             <View/>
           )}
         </View>
+        
         {this.state.mode === 'login' ? (
 
           <View style={loginStyles.bottomView}>
             <TouchableOpacity 
-              style={loginStyles.buttonContainer}
+              style={loginStyles.buttonContainerLogIn}
+              onPress={this.onLogin}
+            >
+              <Text style={loginStyles.buttonTextLogIn}>Log In</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={loginStyles.buttonContainerSignUp}
               onPress={()=>{
                 this.setState({mode: 'create'})
               }}
               >
-              <Text style={loginStyles.buttonText}>Create Account</Text>
+              <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              style={loginStyles.buttonContainer}
-              onPress={this.onLogin}
-            >
-              <Text style={loginStyles.buttonText}>Login</Text>
-            </TouchableOpacity>
+ 
           </View>
 
         ):(
