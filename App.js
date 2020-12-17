@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { SignupScreen } from './SignupScreen'
 import { LoginScreen } from './LoginScreen';
 import { RecordScreen } from './RecordScreen';
 import { ChatScreen } from './ChatScreen';
