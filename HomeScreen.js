@@ -4,6 +4,7 @@ import { homeStyles, commonStyles} from './Styles';
 import { getDataModel } from './DataModel';
 import { FlatList } from 'react-native-gesture-handler';
 import InsetShadow from 'react-native-inset-shadow'
+import { Pedometer } from 'expo-sensors';
 
 
 export class HomeScreen extends React.Component {
@@ -19,6 +20,8 @@ export class HomeScreen extends React.Component {
       recordList: [],
     }
   }
+
+
 
   render() {
     return (
@@ -40,6 +43,7 @@ export class HomeScreen extends React.Component {
                 <TouchableOpacity 
                     style={commonStyles.headerRightIcon}
                     onPress={()=>{
+                        // this.onRanking();
                         this.props.navigation.navigate("Ranking");                    
                     }}
                 >

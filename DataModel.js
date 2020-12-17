@@ -234,6 +234,7 @@ class DataModel {
    */
   getRankedList = () => {
     // convert this.dailyStats to array and then sort based on steps
+    this.loadDailyStats();
     var sortable = [];
     for (var id in this.dailyStats) {
       var userId = this.dailyStats[id].user.objectId;
