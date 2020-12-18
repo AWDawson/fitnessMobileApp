@@ -157,8 +157,9 @@ class DataModel {
     return newUser;
   }
 
-  updateUserProfile = async (userId, dispName, gender, age, wt, ht, activeType) => {
+  updateUserProfile = async (userId, password, dispName, gender, age, wt, ht, activeType) => {
     const user = AV.Object.createWithoutData('_User', userId);
+    user.setPassword(password);
     user.set('age',  age);
     user.set('gender', gender);
     user.set('weight', wt);
