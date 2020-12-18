@@ -278,7 +278,7 @@ class DataModel {
   
   addExerciseRecord = async (exerciseId, duration) => {
     const ExerciseRecords = AV.Object.extend('ExerciseRecords');
-
+    duration = Number(duration);
     const exerciseRecord = new ExerciseRecords();
 
     exerciseRecord.set('UserId',  AV.Object.createWithoutData('_User',this.currentUser.objectId));
@@ -297,7 +297,7 @@ class DataModel {
   
   addFoodRecord = async (foodId, quantity) => {
     const FoodRecords = AV.Object.extend('FoodRecords');
-
+    quantity = Number(quantity);
     const foodRecord = new FoodRecords();
 
     foodRecord.set('UserId',  AV.Object.createWithoutData('_User',this.currentUser.objectId));
