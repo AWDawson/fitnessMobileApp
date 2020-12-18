@@ -67,8 +67,8 @@ export class SignupScreen extends React.Component {
           'Information of ' + info[id] + ' is missing!',
           [{ text: 'OK',style: 'OK'}]
         );
-      }
-      return;
+        return;
+      }   
     }
 
     if(this.state.passwordInput != this.state.reenterPasswordInput){
@@ -91,6 +91,7 @@ export class SignupScreen extends React.Component {
       this.state.heightInput,
       this.state.activeTypeInput
     ).then((newUser) => {
+      console.log(newUser);
       Alert.alert(
         'Signup Scuceeded',
         'User ' + this.state.emailInput + ' is created!',
@@ -298,7 +299,7 @@ export class SignupScreen extends React.Component {
                     {label: 'Female', value: 'female'},
                 ]}
                 placeholder="Select your gender"
-                // defaultValue={this.state.country}
+                // defaultValue='male'
                 containerStyle={loginStyles.inputTextSignUp}
                 style={{
                   // flex: 0.7,
@@ -403,7 +404,7 @@ export class SignupScreen extends React.Component {
                     {label: 'Very hard exercise/sports & physical job or 2x training', value: 'activeTypeInput: extra active'},
                 ]}
                 placeholder="Select your type"
-                // defaultValue={this.state.country}
+                // defaultValue='sedentary'
                 containerStyle={loginStyles.inputTextSignUp}
                 style={{
                   backgroundColor: '#fafafa',

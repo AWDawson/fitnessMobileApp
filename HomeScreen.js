@@ -1,7 +1,9 @@
 import React from 'react';
 import {  Text, View, Image, TouchableOpacity}  from 'react-native';
-import { homeStyles, commonStyles} from './Styles';
+import { homeStyles, commonStyles, rankingStyles} from './Styles';
 import { getDataModel } from './DataModel';
+import { Ionicons } from '@expo/vector-icons';
+
 import { FlatList } from 'react-native-gesture-handler';
 import InsetShadow from 'react-native-inset-shadow'
 import { Pedometer } from 'expo-sensors';
@@ -17,7 +19,7 @@ export class HomeScreen extends React.Component {
       mode: 'exercise',
       calories: '',
       suggestedCal: '',
-      recordList: Object.values(this.dataModel.exerciseRecords),
+      records: Object.values(this.dataModel.exerciseRecords),
     }
   }
 
@@ -89,9 +91,7 @@ export class HomeScreen extends React.Component {
                         <TouchableOpacity 
                             style={homeStyles.listButton}
                             onPress={()=>{
-                                this.props.navigation.navigate("Record",{
-                                mode: (this.state.mode === 'exercise' ? "exercise":"food")
-                              });                    
+                                this.props.navigation.navigate("Record",{mode: this.state.mode});                    
                             }}
                         >
                             <Text style={homeStyles.listButton}>
@@ -101,47 +101,50 @@ export class HomeScreen extends React.Component {
                     </View>
 
                     <View style={homeStyles.listContainer}>
-                        <FlatList
-                            ItemSeparatorComponent={()=>{
-                                return (
-                                    <View style={peopleStyles.separator}/>
-                                );
-                                }}
-                                data={this.state.recordList}
-                                renderItem={({item})=> {
-                                if (this.state.mode === 'exercise'){
-                                    return (
-                                    <TouchableOpacity 
-                                        style={peopleStyles.personRow}
-                                        onPress={()=> {
-                                            this.setState({mode : 'food',
-                                            records: Object.values(this.dataModel.foodRecords)});
-                                        }}
-                                    >
-                                        <Text style={peopleStyles.personText}>{
-                                        this.dataModel.exercises[item.ExerciseId.objectId].Type + "   Duration: " + item.Duration + "min" 
-                                        }</Text>
-                                        <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
-                                    </TouchableOpacity>
-                                    );
-                                } else {
-                                    return (
-                                    <TouchableOpacity 
-                                        style={peopleStyles.personRow}
-                                        onPress={()=> {
-                                            this.setState({mode : 'exercise',
-                                            records: Object.values(this.dataModel.exerciseRecords)});
-                                        }}
-                                    >
-                                        <Text style={peopleStyles.personText}>{
-                                        this.dataModel.foods[item.FoodId.objectId].Type + "  Quantity: " + item.Quantity + ""
-                                        }</Text>
-                                        <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
-                                    </TouchableOpacity>
-                                    );
-                                }
-                            }}
-                        />
+                    <FlatList
+                        ItemSeparatorComponent={()=>{
+                        return (
+                            <View style={rankingStyles.separator}/>
+                        );
+                        }}
+                        data={this.state.records}
+                        renderItem={({item, index})=> {
+                        index += 1;
+                            return (
+                            <View style={rankingStyles.content}>
+                                <Text style={rankingStyles.index}>
+                                {index} 
+                                </Text>
+
+                                {this.state.mode === 'exercise' ? (
+                                <View style={rankingStyles.data}>
+                                    <Text style={rankingStyles.name}>
+                                    {this.dataModel.exercises[item.ExerciseId.objectId].Type}
+                                    </Text>
+                                    <View style={rankingStyles.data2}>
+                                    <Text style={rankingStyles.number}>
+                                    {item.Duration} <Text style={rankingStyles.steps}>mins</Text>
+                                    </Text>
+                                    </View>
+                                </View>
+                                ):(
+                                <View style={rankingStyles.data}>
+                                    <Text style={rankingStyles.name}>
+                                    {this.dataModel.foods[item.FoodId.objectId].Type}
+                                    </Text>
+                                    <View style={rankingStyles.data2}>
+                                    <Text style={rankingStyles.number}>
+                                    x {item.Quantity}
+                                    </Text>
+                                    </View>
+                                </View>        
+                                )}
+                        
+                            </View> 
+                            )
+                        
+                        }}
+                    />
                     </View>
                 </View>
 
@@ -167,7 +170,8 @@ export class HomeScreen extends React.Component {
                         style= {this.state.mode === 'exercise' ? homeStyles.normalButton:homeStyles.exerciseActivateButton}
                         onPress={()=>{
                             this.setState({
-                                mode: 'exercise'
+                                mode: 'exercise',
+                                records: Object.values(this.dataModel.exerciseRecords),
                             });                    
                         }}
                     >
@@ -180,7 +184,8 @@ export class HomeScreen extends React.Component {
                         style= {this.state.mode === 'meal' ? homeStyles.normalButton:homeStyles.mealActivateButton}
                         onPress={()=>{
                             this.setState({
-                                mode: 'meal'
+                                mode: 'meal',
+                                records: Object.values(this.dataModel.foodRecords),
                             });                    
                         }}
                     >
