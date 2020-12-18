@@ -94,6 +94,7 @@ export class AddScreen extends React.Component {
                 <View style={detailStyles.value}>
                   <TextInput style={detailStyles.value}
                       autoCapitalize='none'
+                      // keyboardType={'numeric'}
                       autoCorrect={false}
                       value={this.state.amount}
                       onChangeText={(text)=>{this.computeCalories(text);}}

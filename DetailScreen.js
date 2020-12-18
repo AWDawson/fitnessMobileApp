@@ -137,6 +137,7 @@ export class DetailScreen extends React.Component {
                 <Text style={detailStyles.title}>{this.state.mode === 'exercise' ? 'Duration' : 'Quantity'}</Text>
                 <View style={detailStyles.value}>
                   <TextInput style={detailStyles.value}
+                      // keyboardType={'numeric'}
                       autoCapitalize='none'
                       autoCorrect={false}
                       value={this.state.amount}

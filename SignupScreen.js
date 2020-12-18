@@ -314,8 +314,8 @@ export class SignupScreen extends React.Component {
                     zIndex: 10
                   })
                 }}
-                onChangeItem={(itemValue, itemIndex) =>
-                  this.setState({genderInput: itemValue})
+                onChangeItem={(item) =>
+                  this.setState({genderInput: item.value})
                 }
               />
               {/* <Picker
@@ -349,6 +349,7 @@ export class SignupScreen extends React.Component {
               <Text style={loginStyles.inputLabel}>Weight (kg):</Text>
               <TextInput
                 style={loginStyles.inputTextSignUp}
+                // keyboardType={'numeric'}
                 autoCapitalize='none'
                 autoCorrect={false}
                 value={this.state.weightInput}
@@ -363,6 +364,7 @@ export class SignupScreen extends React.Component {
               <Text style={loginStyles.inputLabel}>Height (cm):</Text>
               <TextInput
                 style={loginStyles.inputTextSignUp}
+                // keyboardType={'numeric'}
                 autoCapitalize='none'
                 autoCorrect={false}
                 value={this.state.heightInput}
@@ -398,10 +400,10 @@ export class SignupScreen extends React.Component {
               <DropDownPicker
                 items={[
                     {label: 'Little or no exercise', value: 'sedentary', hidden: true},
-                    {label: 'Light exercise/sports 1-3 days/week', value: 'activeTypeInput: lightly active'},
-                    {label: 'Moderate exercise/sports 3-5 days/week', value: 'activeTypeInput: lightly active'},
-                    {label: 'Hard exercise/sports 6-7 days a week', value: 'activeTypeInput: lightly active'},
-                    {label: 'Very hard exercise/sports & physical job or 2x training', value: 'activeTypeInput: extra active'},
+                    {label: 'Light exercise/sports 1-3 days/week', value: 'lightly active'},
+                    {label: 'Moderate exercise/sports 3-5 days/week', value: 'lightly active'},
+                    {label: 'Hard exercise/sports 6-7 days a week', value: 'lightly active'},
+                    {label: 'Very hard exercise/sports & physical job or 2x training', value: 'extra active'},
                 ]}
                 placeholder="Select your type"
                 // defaultValue='sedentary'
@@ -413,8 +415,8 @@ export class SignupScreen extends React.Component {
                     justifyContent: 'flex-start'
                 }}
                 dropDownStyle={{backgroundColor: '#fafafa'}}
-                onChangeItem={(itemValue, itemIndex) =>
-                  this.setState({activeTypeInput: itemValue})
+                onChangeItem={(item) =>
+                  this.setState({activeTypeInput: item.value})
                 }
               />
             {/* <Picker
