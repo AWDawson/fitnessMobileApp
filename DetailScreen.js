@@ -31,6 +31,32 @@ export class DetailScreen extends React.Component {
     }
   }
 
+  deleteRecord = async () =>{
+    Alert.alert(
+        'Alert',
+        'Are you sure you want to delete this record?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel'
+          },
+          { text: 'Delete', onPress: async () => {
+              if(this.state.mode === 'exercise'){
+                await this.dataModel.deleteExerciseRecord(this.record.objectId);
+              } else {
+                await this.dataModel.deleteFoodRecord(this.record.objectId);
+              }
+              this.props.navigation.navigate("Home", {
+                mode:this.state.mode
+              });
+          }
+        }
+        ],
+        { cancelable: false }
+      );
+  }
+
   updateRecord = async () =>{
     if(this.state.amount === ''){
         Alert.alert(
@@ -53,7 +79,7 @@ export class DetailScreen extends React.Component {
     }
     this.props.navigation.navigate("Home", {
         mode:this.state.mode
-    })
+    });
   }
 
   computeCalories = (amount) => {
@@ -100,7 +126,11 @@ export class DetailScreen extends React.Component {
             >
             <Text >Save</Text>
           </TouchableOpacity>
-
+          <TouchableOpacity 
+            onPress={this.deleteRecord}
+            >
+            <Text >Delete</Text>
+          </TouchableOpacity>
         </View>
           </KeyboardAvoidingView>
       )
