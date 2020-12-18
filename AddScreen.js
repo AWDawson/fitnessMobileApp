@@ -112,7 +112,7 @@ export class AddScreen extends React.Component {
                 style={loginStyles.buttonContainerSignUp}
                 onPress={this.createRecord}
                 >
-                <Text style={loginStyles.buttonTextSignUp}>Add</Text>
+                <Text style={this.state.mode === 'exercise' ? loginStyles.buttonTextSignUp:loginStyles.buttonTextSignUpFood}>Add</Text>
               </TouchableOpacity>
 
 

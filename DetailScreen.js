@@ -158,7 +158,7 @@ export class DetailScreen extends React.Component {
                 style={loginStyles.buttonContainerSignUp}
                 onPress={this.updateRecord}
                 >
-                <Text style={loginStyles.buttonTextSignUp}>Save</Text>
+                <Text style={this.state.mode === 'exercise' ? loginStyles.buttonTextSignUp:loginStyles.buttonTextSignUpFood}>Save</Text>
               </TouchableOpacity>
 
 

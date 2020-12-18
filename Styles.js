@@ -172,8 +172,8 @@ export const rankingStyles = StyleSheet.create({
   name:{
     color:"white",
     fontSize: 18,
-    fontWeight: '600'
-
+    fontWeight: '600',
+    width: 200,
   },
   number:{
     color:"white",
@@ -511,6 +511,12 @@ export const loginStyles = StyleSheet.create({
           buttonTextSignUp: {
             textAlign: 'center',
             color: colors.exercise,
+            fontSize: 20,
+            fontWeight: 'bold',
+          },
+          buttonTextSignUpFood: {
+            textAlign: 'center',
+            color: colors.food,
             fontSize: 20,
             fontWeight: 'bold',
           }
