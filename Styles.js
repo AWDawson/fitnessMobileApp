@@ -81,7 +81,7 @@ export const rankingStyles = StyleSheet.create({
     // paddingLeft:20,
     width:"10%",
     color:"white",
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: '600'
   },
   data:{
@@ -100,13 +100,13 @@ export const rankingStyles = StyleSheet.create({
   },
   name:{
     color:"white",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '600'
 
   },
   number:{
     color:"white",
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: '600'
   },
   steps:{

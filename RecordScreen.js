@@ -70,7 +70,7 @@ export class RecordScreen extends React.Component {
                               this.props.navigation.navigate("Detail",{mode: this.state.mode});                    
                             }}
                         >
-                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:40}}/> 
+                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:30}}/> 
                           </TouchableOpacity>
                         </View>
                       </View>
@@ -88,7 +88,7 @@ export class RecordScreen extends React.Component {
                               this.props.navigation.navigate("Detail",{mode: this.state.mode});                    
                             }}
                           >
-                          <Ionicons name="ios-arrow-dropright" size={24} color="white"/> 
+                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:30}}/> 
                           </TouchableOpacity>
                         </View>
                       </View>        
