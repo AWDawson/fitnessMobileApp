@@ -1,6 +1,7 @@
 import React from 'react';
 import {  Text, View, Image, TouchableOpacity}  from 'react-native';
-import { homeStyles, commonStyles} from './Styles';
+import { homeStyles, commonStyles, peopleStyles } from './Styles';
+import { Ionicons } from '@expo/vector-icons';
 import { getDataModel } from './DataModel';
 import { FlatList } from 'react-native-gesture-handler';
 import InsetShadow from 'react-native-inset-shadow'
