@@ -85,7 +85,7 @@ export const rankingStyles = StyleSheet.create({
     fontWeight: '600'
   },
   data:{
-    paddingLeft: 20,
+    paddingLeft: 10,
     width:"90%",
     flexDirection:"row",
     alignItems:"center",
