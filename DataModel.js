@@ -2,6 +2,8 @@ import firebase from 'firebase';
 import '@firebase/firestore';
 import '@firebase/storage';
 import { firebaseConfig } from './Secrets';
+import {Alert} 
+  from 'react-native';
 
 import AV from 'leancloud-storage/core';
 import * as adapters from '@leancloud/platform-adapters-react-native';
@@ -137,6 +139,10 @@ class DataModel {
     // 可选
     user.setEmail(email);
 
+    age = Number(age);
+    wt = Number(wt);
+    ht = Number(ht);
+
     // 设置其他属性的方法跟 AV.Object 一样
     user.set('gender', gender);
     user.set('age', age);
@@ -145,19 +151,23 @@ class DataModel {
     user.set('activeType', activeType);
     var recommendCalorie = this.calculateRecommendDailyCalorie(gender, age, wt, ht, activeType);
     user.set('recommendCalorie', recommendCalorie);
+    console.log(user);
     newUser = await user.signUp().then((user) => {
       // 注册成功
       console.log(`注册成功。objectId：${user.id}`);
       return user;
     }, (error) => {
       // 注册失败（通常是因为用户名已被使用）
-      return null;
+      return error;
     });
     
     return newUser;
   }
 
   updateUserProfile = async (userId, password, dispName, gender, age, wt, ht, activeType) => {
+    age = Number(age);
+    wt = Number(wt);
+    ht = Number(ht);
     const user = AV.Object.createWithoutData('_User', userId);
     user.setPassword(password);
     user.set('age',  age);
@@ -168,14 +178,26 @@ class DataModel {
     user.set('activeType', activeType);
     var recommendCalorie = this.calculateRecommendDailyCalorie(gender, age, wt, ht, activeType);
     user.set('recommendCalorie', recommendCalorie);
-    await user.save().then((updatedUser) => {
-      this.users.push(updatedUser.toJSON());
+    let updatedUser = await user.save().then((updatedUser) => {
       let thisUser = updatedUser.toJSON();
       this.users[thisUser.objectId] = thisUser;
       this.currentUser = updatedUser;
+      Alert.alert(
+        'Success',
+        'User profile is successfully created!',
+        [{ text: 'OK',style: 'OK'}]
+      );
+      return updatedUser;
     }, (error) => {
       console.log(error)
+      Alert.alert(
+        'Failed',
+        'Failed to update user profile.',
+        [{ text: 'OK',style: 'OK'}]
+      );
+      return error;
     });
+    return updatedUser;
   }
 
   /**
