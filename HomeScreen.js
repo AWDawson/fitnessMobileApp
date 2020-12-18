@@ -14,12 +14,16 @@ export class HomeScreen extends React.Component {
     super(props);
 
     this.dataModel = getDataModel();
-
+    let records = Object.values(this.dataModel.exerciseRecords);
+    records.sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    console.log(records);
+    records = records.slice(0,3);
+    console.log(records);
     this.state = {
       mode: 'exercise',
       calories: '',
       suggestedCal: '',
-      records: Object.values(this.dataModel.exerciseRecords),
+      records: records,
     }
   }
 
@@ -32,8 +36,11 @@ export class HomeScreen extends React.Component {
   }
 
   onFocus = () => {
-    this.setState({records: this.state.mode === 'exercise' ? 
-        Object.values(this.dataModel.exerciseRecords) : Object.values(this.dataModel.foodRecords)});
+    let records = this.state.mode === 'exercise' ? Object.values(this.dataModel.exerciseRecords)
+        : Object.values(this.dataModel.foodRecords);
+    records.sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    records = records.slice(0,3);
+    this.setState({records: records});
   }
 
 
