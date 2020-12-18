@@ -67,7 +67,10 @@ export class RecordScreen extends React.Component {
                           </Text>
                           <TouchableOpacity 
                             onPress={()=> {
-                              this.props.navigation.navigate("Detail",{mode: this.state.mode});                    
+                              this.props.navigation.navigate("Detail",{
+                                mode: this.state.mode,
+                                record: item
+                              });                    
                             }}
                         >
                           <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:30}}/> 
@@ -85,7 +88,10 @@ export class RecordScreen extends React.Component {
                           </Text>
                           <TouchableOpacity 
                             onPress={()=> {
-                              this.props.navigation.navigate("Detail",{mode: this.state.mode});                    
+                              this.props.navigation.navigate("Detail",{
+                                mode: this.state.mode,
+                                record: item
+                              });                    
                             }}
                           >
                           <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:30}}/> 

@@ -23,6 +23,17 @@ export class HomeScreen extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.focusUnsubscribe = this.props.navigation.addListener('focus', this.onFocus);
+  }
+
+  componentWillUnmount() {
+    this.focusUnsubscribe();
+  }
+
+  onFocus = () => {
+    this.setState({records:Object.values(this.dataModel.exerciseRecords)});
+  }
 
 
   render() {

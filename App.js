@@ -8,7 +8,8 @@ import { ChatScreen } from './ChatScreen';
 import { CameraScreen } from './CameraScreen';
 import { RankingScreen } from './RankingScreen';
 import { HomeScreen } from './HomeScreen';
-import { UserScreen } from './UserScreen'
+import { UserScreen } from './UserScreen';
+import { DetailScreen } from './DetailScreen';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="User" component={UserScreen} />
+        <Stack.Screen name="Detail" component={DetailScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
