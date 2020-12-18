@@ -241,16 +241,16 @@ export const homeStyles = StyleSheet.create({
         position:'absolute',
         alignSelf: 'center',
         fontWeight: '500',
-        fontSize: 80,
-        top: 40
+        fontSize: 60,
+        top: 50
       },
       meterText:{
         color: 'white',
         position:'absolute',
         alignSelf: 'center',
         fontWeight: '500',
-        fontSize: 40,
-        top: 125
+        fontSize: 35,
+        top: 120
       },
     list:{
       flex: 3,

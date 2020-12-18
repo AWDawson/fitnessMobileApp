@@ -27,6 +27,7 @@ export class DetailScreen extends React.Component {
     this.state = {
       mode: this.props.route.params.mode,
       calories: calories.toFixed(1) + '',
+      id: this.props.route.params.mode === 'exercise' ? this.record.ExerciseId.objectId:this.record.FoodId.objectId,
       amount: (this.props.route.params.mode === 'exercise' ? this.record.Duration : this.record.Quantity) + '',
       type: this.props.route.params.mode === 'exercise' ? this.dataModel.exercises[this.record.ExerciseId.objectId].Type:
         this.dataModel.foods[this.record.FoodId.objectId].Type
@@ -101,16 +102,14 @@ export class DetailScreen extends React.Component {
         behavior={'height'}
         keyboardVerticalOffset={0}
         style={this.state.mode === 'exercise' ? commonStyles.commonContainer:homeStyles.foodContainer}>
-
-
-              <View style={rankingStyles.header}>
+              <View style={homeStyles.header}>
                   <Text style={commonStyles.headerText}>
                       {this.state.type}
                   </Text>
                   <TouchableOpacity
                       style={commonStyles.headerLeftIcon}
                       onPress={()=>{
-                          this.props.navigation.navigate("Home");                    
+                          this.props.navigation.goBack();                    
                       }}
                   >
                     <Image
@@ -121,12 +120,15 @@ export class DetailScreen extends React.Component {
                   <TouchableOpacity 
                     onPress={this.deleteRecord}
                     >
-                    <Text >Delete</Text>
+                   <Image
+                      source={require('./assets/delete.png')}
+                      style={commonStyles.headerRightIcon}
+                    />     
                   </TouchableOpacity>
               </View>
 
               <Image 
-                  source={Icons[this.record.ExerciseId.objectId]}
+                  source={Icons[this.state.id]}
                   style={detailStyles.icon}
               />    
 
@@ -140,7 +142,9 @@ export class DetailScreen extends React.Component {
                       value={this.state.amount}
                       onChangeText={(text)=>{this.computeCalories(text);}}
                   />
-                  {this.state.mode === 'exercise' ? <Text style={detailStyles.unit}>  min</Text> : ''}
+                  {(this.state.mode === 'exercise') && <Text style={detailStyles.unit}>  min</Text>}
+                  
+
                 </View>
 
                 <Text style={detailStyles.title}>{this.state.mode === 'exercise' ? 'Total Consumption' : 'Total Intake'}</Text>

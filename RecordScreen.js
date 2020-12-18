@@ -31,7 +31,7 @@ export class RecordScreen extends React.Component {
                 <TouchableOpacity
                     style={commonStyles.headerLeftIcon}
                     onPress={()=>{
-                        this.props.navigation.navigate("Home");                    
+                        this.props.navigation.goBack();                    
                     }}
                 >
                 <Image 
