@@ -9,7 +9,11 @@ import { CameraScreen } from './CameraScreen';
 import { RankingScreen } from './RankingScreen';
 import { HomeScreen } from './HomeScreen';
 import { UserScreen } from './UserScreen';
+<<<<<<< HEAD
 import { DetailScreen } from './DetailScreen';
+=======
+import { SearchScreen }  from './SearchScreen'
+>>>>>>> a355f1998072544a5737ace8d4808d700fc1fbba
 
 const Stack = createStackNavigator();
 
@@ -30,7 +34,12 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="User" component={UserScreen} />
+<<<<<<< HEAD
         <Stack.Screen name="Detail" component={DetailScreen} />
+=======
+        <Stack.Screen name="Search" component={SearchScreen} />
+
+>>>>>>> a355f1998072544a5737ace8d4808d700fc1fbba
 
       </Stack.Navigator>
     </NavigationContainer>
