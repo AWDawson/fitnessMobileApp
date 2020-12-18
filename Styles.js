@@ -71,23 +71,31 @@ export const rankingStyles = StyleSheet.create({
     paddingBottom:10, 
     flexDirection:"row",
     width:"90%",
+    alignSelf:"center",
     color:"white",
     alignItems:"center",
+    justifyContent:"center"
 
   },
   index:{
-    marginLeft:20,
+    // paddingLeft:20,
     width:"10%",
     color:"white",
     fontSize: 20,
     fontWeight: '600'
-
   },
   data:{
+    paddingLeft: 20,
     width:"90%",
     flexDirection:"row",
     alignItems:"center",
     justifyContent:"space-between",
+    color:"white",
+  },
+  data2:{
+    flexDirection:"row",
+    alignItems:"center",
+    // justifyContent:"space-between",
     color:"white",
   },
   name:{
@@ -134,7 +142,7 @@ export const homeStyles = StyleSheet.create({
     justifyContent: 'center',
   },
     suggestion:{
-      flex: 2,
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -144,8 +152,8 @@ export const homeStyles = StyleSheet.create({
       opacity: 0.8
     },
     meter:{
-      paddingTop: 30,
-      flex: 8,
+      marginTop: 5,
+      flex: 3,
       // top: 50,
       position:'relative',
       // height: 500
@@ -175,31 +183,47 @@ export const homeStyles = StyleSheet.create({
       },
     list:{
       flex: 3,
-      width:'90%',
+      marginTop: 50,
+      width: 330,
     },
       listHeader:{
         // width:'100%',
+        // marginTop: 5,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
 
       },
       listTitle:{
-        color: 'white'
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '600',
 
       },
       listButton:{
-        color: 'white'
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '600',
 
       },
       listContainer:{
+        height: 140,
+        width: 330,
+        borderColor: 'white',
+        borderWidth: 3,
+        // backgroundColor: "white",
+        marginTop: 5,
+        // marginBottom: 20,
+        // opacity: 0.8,
+        borderRadius: 20,
+        overflow: "hidden"
 
       },
     addButton:{
       margin: 20,
       height: 53,
       flexDirection:'row',
-      width: 350,
+      width: 330,
       alignItems: 'center',
       borderWidth: 3,
       borderColor: 'white',
@@ -319,7 +343,6 @@ export const loginStyles = StyleSheet.create({
         paddingVertical: 13,
         // borderBottomWidth: 2,
         width: '100%',
-
         // borderColor: colors.exercise
       },
         inputLabelPic:{

@@ -1,9 +1,9 @@
 import React from 'react';
 import { TextInput, Text, View, 
-  FlatList, TouchableOpacity, Alert } 
+  FlatList, TouchableOpacity, Alert, Image} 
   from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { peopleStyles, colors } from './Styles';
+import { peopleStyles, colors, commonStyles, rankingStyles } from './Styles';
 import { getDataModel } from './DataModel';
 
 export class RecordScreen extends React.Component {
@@ -22,52 +22,83 @@ export class RecordScreen extends React.Component {
 
   render() {
     return (
-      <View style={peopleStyles.container}>
+      <View style={this.state.mode === 'exercise' ? commonStyles.commonContainer:homeStyles.foodContainer}>
 
-        <View style={peopleStyles.peopleListContainer}>
+          <View style={rankingStyles.header}>
+                <Text style={commonStyles.headerText}>
+                    {this.state.mode === 'exercise'? "Exercise":"Food"} <Text>Record</Text>
+                </Text>
+                <TouchableOpacity
+                    style={commonStyles.headerLeftIcon}
+                    onPress={()=>{
+                        this.props.navigation.navigate("Home");                    
+                    }}
+                >
+                <Image 
+                    source={require('./assets/back.png')}
+                    style={commonStyles.headerLeftIcon}
+                />                
+                </TouchableOpacity>
+          </View>
+
           <FlatList
             ItemSeparatorComponent={()=>{
               return (
-                <View style={peopleStyles.separator}/>
+                <View style={rankingStyles.separator}/>
               );
             }}
             data={this.state.records}
-            renderItem={({item})=> {
-              if (this.state.mode === 'exercise'){
+            renderItem={({item, index})=> {
+              index += 1;
                 return (
-                  <TouchableOpacity 
-                    style={peopleStyles.personRow}
-                    onPress={()=> {
-                      this.setState({mode : 'food',
-                      records: Object.values(this.dataModel.foodRecords)});
-                    }}
-                  >
-                    <Text style={peopleStyles.personText}>{
-                    this.dataModel.exercises[item.ExerciseId.objectId].Type + "   Duration: " + item.Duration + "min" 
-                    }</Text>
-                    <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
-                  </TouchableOpacity>
-                );
-              } else {
-                return (
-                  <TouchableOpacity 
-                    style={peopleStyles.personRow}
-                    onPress={()=> {
-                      this.setState({mode : 'exercise',
-                      records: Object.values(this.dataModel.exerciseRecords)});
-                    }}
-                  >
-                    <Text style={peopleStyles.personText}>{
-                      this.dataModel.foods[item.FoodId.objectId].Type + "  Quantity: " + item.Quantity + ""
-                    }</Text>
-                    <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
-                  </TouchableOpacity>
-                );
-              }
+                  <View style={rankingStyles.content}>
+                    <Text style={rankingStyles.index}>
+                      {index} 
+                    </Text>
+
+                      {this.state.mode === 'exercise' ? (
+                      <View style={rankingStyles.data}>
+                        <Text style={rankingStyles.name}>
+                          {this.dataModel.exercises[item.ExerciseId.objectId].Type}
+                        </Text>
+                        <View style={rankingStyles.data2}>
+                          <Text style={rankingStyles.number}>
+                          {item.Duration} <Text style={rankingStyles.steps}>mins</Text>
+                          </Text>
+                          <TouchableOpacity 
+                            onPress={()=> {
+                              this.props.navigation.navigate("Detail",{mode: this.state.mode});                    
+                            }}
+                        >
+                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:40}}/> 
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                      ):(
+                      <View style={rankingStyles.data}>
+                        <Text style={rankingStyles.name}>
+                          {this.dataModel.foods[item.FoodId.objectId].Type}
+                        </Text>
+                        <View style={rankingStyles.data2}>
+                          <Text style={rankingStyles.number}>
+                          x {item.Quantity}
+                          </Text>
+                          <TouchableOpacity 
+                            onPress={()=> {
+                              this.props.navigation.navigate("Detail",{mode: this.state.mode});                    
+                            }}
+                          >
+                          <Ionicons name="ios-arrow-dropright" size={24} color="white"/> 
+                          </TouchableOpacity>
+                        </View>
+                      </View>        
+                      )}
+               
+                  </View> 
+                )
               
             }}
           />
-        </View>
       </View>
     )
   }
