@@ -43,6 +43,17 @@ export class HomeScreen extends React.Component {
     this.setState({records: records});
   }
 
+  changeRecord(mode){
+    let records = mode === 'exercise' ? Object.values(this.dataModel.exerciseRecords)
+        : Object.values(this.dataModel.foodRecords);
+    records.sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    records = records.slice(0,3);
+    this.setState({
+        mode: mode,
+        records: records
+    });
+  }
+
 
   render() {
     return (
@@ -188,11 +199,8 @@ export class HomeScreen extends React.Component {
             <View style={homeStyles.bottom}>
                     <TouchableOpacity 
                         style= {this.state.mode === 'exercise' ? homeStyles.normalButton:homeStyles.exerciseActivateButton}
-                        onPress={()=>{
-                            this.setState({
-                                mode: 'exercise',
-                                records: Object.values(this.dataModel.exerciseRecords),
-                            });                    
+                        onPress={()=>{       
+                            this.changeRecord('exercise')                     
                         }}
                     >
                     <Image 
@@ -203,10 +211,7 @@ export class HomeScreen extends React.Component {
                     <TouchableOpacity 
                         style= {this.state.mode === 'meal' ? homeStyles.normalButton:homeStyles.mealActivateButton}
                         onPress={()=>{
-                            this.setState({
-                                mode: 'meal',
-                                records: Object.values(this.dataModel.foodRecords),
-                            });                    
+                            this.changeRecord('meal')              
                         }}
                     >
                     <Image 
