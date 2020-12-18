@@ -88,6 +88,9 @@ export class UserScreen extends React.Component {
       this.state.heightInput,
       this.state.activeTypeInput
     );
+
+    this.props.navigation.goBack();                    
+
   }
 
 
@@ -101,7 +104,7 @@ export class UserScreen extends React.Component {
         justifyContent: 'center',
         paddingTop: 20
       }}
-      behavior={"position"}
+      // behavior={"position"}
       keyboardVerticalOffset={0}>
       <View style={{
         flex: 8,

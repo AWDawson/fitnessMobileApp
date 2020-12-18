@@ -181,7 +181,7 @@ class DataModel {
     let updatedUser = await user.save().then((updatedUser) => {
       let thisUser = updatedUser.toJSON();
       this.users[thisUser.objectId] = thisUser;
-      this.currentUser = updatedUser;
+      this.currentUser = thisUser;
       Alert.alert(
         'Success',
         'User profile is successfully created!',
