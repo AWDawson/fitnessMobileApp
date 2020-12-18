@@ -11,7 +11,8 @@ import { Pedometer } from 'expo-sensors';
 
 class OptionList extends React.Component {
     constructor(props) {
-        super(props);  
+        super(props);
+
     }
 
     render(){
@@ -22,7 +23,10 @@ class OptionList extends React.Component {
                 key = {item.objectId}
                 style={searchStyles.option}
                 onPress={()=>{
-                    this.props.navigation.navigate("Detail",{option:item});                    
+                    this.props.navigation.navigate("Add",{
+                        mode : ('MET' in item) ? 'exercise' : 'food',
+                        itemId: item.objectId
+                    });                    
                 }}
             >
                 <Image
@@ -77,7 +81,7 @@ export class SearchScreen extends React.Component {
             </View>
 
             <View>
-                <OptionList list={this.state.options}/>
+                <OptionList list={this.state.options} navigation={this.props.navigation}/>
             </View>
         </View>
     )

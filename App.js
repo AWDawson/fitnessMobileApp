@@ -10,7 +10,8 @@ import { RankingScreen } from './RankingScreen';
 import { HomeScreen } from './HomeScreen';
 import { UserScreen } from './UserScreen';
 import { DetailScreen } from './DetailScreen';
-import { SearchScreen }  from './SearchScreen'
+import { SearchScreen }  from './SearchScreen';
+import { AddScreen } from './AddScreen'
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,7 @@ function App() {
         <Stack.Screen name="User" component={UserScreen} />
         <Stack.Screen name="Detail" component={DetailScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Add" component={AddScreen} />
 
 
       </Stack.Navigator>
