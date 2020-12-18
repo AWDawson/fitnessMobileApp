@@ -91,7 +91,7 @@ export class LoginScreen extends React.Component {
     if (!success){
       return;
     }
-    
+    await this.dataModel.asyncInit();
     await this.dataModel.loadExerciseRecords();
     await this.dataModel.loadFoodRecords();
     await this.dataModel.loadDailyStats();

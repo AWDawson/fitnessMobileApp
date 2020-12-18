@@ -126,14 +126,9 @@ export class UserScreen extends React.Component {
 
         <View style={loginStyles.inputRowSignUp}>
             <Text style={loginStyles.inputLabel}>Email:</Text>
-            <TextInput
+            <Text
               style={loginStyles.inputTextSignUp}
-              keyboardType='email-address'
-              autoCapitalize='none'
-              autoCorrect={false}
-              value={this.state.emailInput}
-              onChangeText={(text)=>{this.setState({emailInput: text})}}
-            />
+            >{this.state.emailInput}</Text>
         </View>
       
        <View style={loginStyles.inputRowSignUp}>

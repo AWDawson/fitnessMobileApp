@@ -32,11 +32,10 @@ class DataModel {
     this.foodRecords = {};
     this.dailyStats = {};
 
-    this.asyncInit();
   }
 
   asyncInit = async () => {
-    this.loadUsers();
+    await this.loadUsers();
     await this.loadExercises();
     await this.loadFoods();
     console.log("DailyStats loaded successfully!");
@@ -158,7 +157,7 @@ class DataModel {
       return user;
     }, (error) => {
       // 注册失败（通常是因为用户名已被使用）
-      return error;
+      throw error;
     });
     
     return newUser;
@@ -195,7 +194,7 @@ class DataModel {
         'Failed to update user profile.',
         [{ text: 'OK',style: 'OK'}]
       );
-      return error;
+      throw error;
     });
     return updatedUser;
   }

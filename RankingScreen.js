@@ -16,10 +16,10 @@ export class RankingScreen extends React.Component {
   
       this.dataModel = getDataModel();
       this.state = {
-        rankedList: []
+        rankedList: this.dataModel.getRankedList()
         // rankedList: [],
       }
-      this.getList();
+      //this.getList();
     }
 
     getList = async () => {

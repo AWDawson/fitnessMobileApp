@@ -77,8 +77,9 @@ export class HomeScreen extends React.Component {
 
                 <TouchableOpacity 
                     style={commonStyles.headerRightIcon}
-                    onPress={()=>{
+                    onPress={async ()=>{
                         // this.onRanking();
+                        await this.dataModel.loadDailyStats();
                         this.props.navigation.navigate("Ranking");                    
                     }}
                 >
