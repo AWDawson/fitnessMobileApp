@@ -8,6 +8,10 @@ import { getDataModel } from './DataModel';
 
 import AV, { Query } from 'leancloud-storage/core';
 import {Picker} from '@react-native-picker/picker';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Icon from 'react-native-vector-icons/Feather';
+
+
 import * as adapters from '@leancloud/platform-adapters-react-native';
 import { config } from './leanCloudConfig'
 import Fitness from '@ovalmoney/react-native-fitness';
@@ -200,25 +204,28 @@ export class SignupScreen extends React.Component {
           justifyContent: 'center',
           paddingTop: 20
         }}
-        behavior={"height"}
-        keyboardVerticalOffset={10}>
+        behavior={"position"}
+        keyboardVerticalOffset={0}>
         <View style={{
-          height: 640,
+          flex: 8,
       // flex: 0.3,
       justifyContent: 'center',
       alignItems: 'center',
-      width: '90%',
+      width: '80%',
       backgroundColor: 'white',
-      opacity: 0.6,
+      opacity: 0.8,
       borderRadius:20,
-      marginTop: 30,
-      marginBottom: 30,
+      marginTop: 40,
+      ...(Platform.OS !== 'android' && {
+        zIndex: 10
+      })
+      // marginBottom: 30,
     }}>
 
-          <View style={loginStyles.inputRow}>
+          <View style={loginStyles.inputRowSignUp}>
               <Text style={loginStyles.inputLabel}>Email:</Text>
               <TextInput
-                style={loginStyles.inputText}
+                style={loginStyles.inputTextSignUp}
                 keyboardType='email-address'
                 autoCapitalize='none'
                 autoCorrect={false}
@@ -227,10 +234,10 @@ export class SignupScreen extends React.Component {
               />
           </View>
         
-         <View style={loginStyles.inputRow}>
+         <View style={loginStyles.inputRowSignUp}>
               <Text style={loginStyles.inputLabel}>Display Name:</Text>
               <TextInput
-                style={loginStyles.inputText}
+                style={loginStyles.inputTextSignUp}
                 autoCapitalize='none'
                 autoCorrect={false}
                 value={this.state.displayNameInput}
@@ -238,10 +245,10 @@ export class SignupScreen extends React.Component {
               />
           </View>
 
-          <View style={loginStyles.inputRow}>
+          <View style={loginStyles.inputRowSignUp}>
               <Text style={loginStyles.inputLabel}>Password:</Text>
               <TextInput
-                style={loginStyles.inputText}
+                style={loginStyles.inputTextSignUp}
                 textContentType='password'
                 autoCapitalize='none'
                 autoCorrect={false}
@@ -250,10 +257,20 @@ export class SignupScreen extends React.Component {
               />
           </View>
 
-          <View style={loginStyles.inputRow}>
+          <View  style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              paddingVertical: 13,
+              // borderBottomWidth: 2,
+              width: '100%',
+              ...(Platform.OS !== 'android' && {
+                zIndex: 10
+              })
+          }}>
               <Text style={loginStyles.inputLabel}>Re-enter Password:</Text>
               <TextInput
-                style={loginStyles.inputText}
+                style={loginStyles.inputTextSignUp}
                 textContentType='password'
                 autoCapitalize='none'
                 autoCorrect={false}
@@ -262,10 +279,45 @@ export class SignupScreen extends React.Component {
               />
           </View>
 
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              paddingVertical: 13,
+              // borderBottomWidth: 2,
+              width: '100%',
+              ...(Platform.OS !== 'android' && {
+                zIndex: 10
+              })
+          }}>
               <Text style={loginStyles.inputLabel}>Gender:</Text>
-              <Picker
+
+              <DropDownPicker
+                items={[
+                    {label: 'Male', value: 'male', hidden: true},
+                    {label: 'Female', value: 'female'},
+                ]}
+                placeholder="Select your gender"
+                // defaultValue={this.state.country}
+                containerStyle={loginStyles.inputTextSignUp}
+                style={{
+                  // flex: 0.7,
+                  backgroundColor: '#fafafa',
+                }}
+                itemStyle={{
+                    justifyContent: 'flex-start'
+                }}
+                dropDownStyle={{
+                  backgroundColor: '#fafafa',
+                  ...(Platform.OS !== 'android' && {
+                    zIndex: 10
+                  })
+                }}
+                onChangeItem={(itemValue, itemIndex) =>
+                  this.setState({genderInput: itemValue})
+                }
+              />
+              {/* <Picker
               selectedValue={this.state.activeTypeInput}
               style={{height: 50, width: 100}}
               onValueChange={(itemValue, itemIndex) =>
@@ -273,16 +325,14 @@ export class SignupScreen extends React.Component {
             }>
               <Picker.Item label="male" value="male" />
               <Picker.Item label="female" value="female" />
-              </Picker>
+              </Picker> */}
             </View>
-          ):(
-            <View/>
-          )}
+
           {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
+            <View style={loginStyles.inputRowSignUp}>
               <Text style={loginStyles.inputLabel}>Age:</Text>
               <TextInput
-                style={loginStyles.inputText}
+                style={loginStyles.inputTextSignUp}
                 keyboardType={'numeric'}
                 autoCapitalize='none'
                 autoCorrect={false}
@@ -294,10 +344,10 @@ export class SignupScreen extends React.Component {
             <View/>
           )}
           {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
+            <View style={loginStyles.inputRowSignUp}>
               <Text style={loginStyles.inputLabel}>Weight (kg):</Text>
               <TextInput
-                style={loginStyles.inputText}
+                style={loginStyles.inputTextSignUp}
                 autoCapitalize='none'
                 autoCorrect={false}
                 value={this.state.weightInput}
@@ -308,10 +358,10 @@ export class SignupScreen extends React.Component {
             <View/>
           )}
           {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
+            <View style={loginStyles.inputRowSignUp}>
               <Text style={loginStyles.inputLabel}>Height (cm):</Text>
               <TextInput
-                style={loginStyles.inputText}
+                style={loginStyles.inputTextSignUp}
                 autoCapitalize='none'
                 autoCorrect={false}
                 value={this.state.heightInput}
@@ -331,9 +381,42 @@ export class SignupScreen extends React.Component {
 
           */}
           
-            <View style={loginStyles.inputRow}>
+            <View  style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              paddingVertical: 13,
+              // borderBottomWidth: 2,
+              width: '100%',
+              ...(Platform.OS !== 'android' && {
+                zIndex: 10
+              })
+          }}>
               <Text style={loginStyles.inputLabel}>Active Type:</Text>
-            <Picker
+
+              <DropDownPicker
+                items={[
+                    {label: 'Little or no exercise', value: 'sedentary', hidden: true},
+                    {label: 'Light exercise/sports 1-3 days/week', value: 'activeTypeInput: lightly active'},
+                    {label: 'Moderate exercise/sports 3-5 days/week', value: 'activeTypeInput: lightly active'},
+                    {label: 'Hard exercise/sports 6-7 days a week', value: 'activeTypeInput: lightly active'},
+                    {label: 'Very hard exercise/sports & physical job or 2x training', value: 'activeTypeInput: extra active'},
+                ]}
+                placeholder="Select your type"
+                // defaultValue={this.state.country}
+                containerStyle={loginStyles.inputTextSignUp}
+                style={{
+                  backgroundColor: '#fafafa',
+                }}
+                itemStyle={{
+                    justifyContent: 'flex-start'
+                }}
+                dropDownStyle={{backgroundColor: '#fafafa'}}
+                onChangeItem={(itemValue, itemIndex) =>
+                  this.setState({activeTypeInput: itemValue})
+                }
+              />
+            {/* <Picker
               selectedValue={this.state.activeTypeInput}
               style={{height: 50, width: 100}}
               onValueChange={(itemValue, itemIndex) =>
@@ -345,30 +428,36 @@ export class SignupScreen extends React.Component {
               <Picker.Item label="hard exercise/sports 6-7 days a week" value="activeTypeInput: lightly active" />
               <Picker.Item label="very hard exercise/sports & physical job or 2x training" value="activeTypeInput: extra active" />
 
-        </Picker>
+            </Picker> */}
              
             </View>
 
-          <TouchableOpacity 
-              style={{ 
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 30,
-              backgroundColor: 'white',
-              width: 300,
-              height: 65,
-              marginTop: 10,
-            }}
-              onPress={this.onCreateAccount}
-              >
-              <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
-            </TouchableOpacity>
+
         </View>
         
-        
+   
            
- 
+        <View style={loginStyles.bottomViewSignUp}> 
+          <TouchableOpacity 
+                style={loginStyles.buttonContainerLogIn2}
+                onPress={()=>{
+                  this.props.navigation.navigate("Login", {
+                    mode:'login'
+                  })
+                }}
+                >
+                <Text style={loginStyles.buttonTextLogIn}>Cancel</Text>
+          </TouchableOpacity>  
+
+          <TouchableOpacity 
+                style={loginStyles.buttonContainerSignUp2}
+                onPress={this.onCreateAccount}
+                >
+                <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
+          </TouchableOpacity>  
+        </View>
        
+
       </KeyboardAvoidingView>
     )
   }

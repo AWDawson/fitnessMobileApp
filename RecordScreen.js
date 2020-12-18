@@ -23,6 +23,7 @@ export class RecordScreen extends React.Component {
   render() {
     return (
       <View style={peopleStyles.container}>
+
         <View style={peopleStyles.peopleListContainer}>
           <FlatList
             ItemSeparatorComponent={()=>{

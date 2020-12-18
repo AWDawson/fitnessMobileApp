@@ -187,20 +187,7 @@ export class LoginScreen extends React.Component {
               onChangeText={(text)=>{this.setState({emailInput: text})}}
             />
           </View>
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
-              <Text style={loginStyles.inputLabel}>Display Name:</Text>
-              <TextInput
-                style={loginStyles.inputText}
-                autoCapitalize='none'
-                autoCorrect={false}
-                value={this.state.displayNameInput}
-                onChangeText={(text)=>{this.setState({displayNameInput: text})}}
-              />
-            </View>
-          ):(
-            <View/>
-          )}
+
           <View style={loginStyles.inputRow}>
           <Image 
               source={require('./assets/password.png')}
@@ -215,144 +202,29 @@ export class LoginScreen extends React.Component {
               onChangeText={(text)=>{this.setState({passwordInput: text})}}
           />
           </View>
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
-              <Text style={loginStyles.inputLabel}>Re-enter Password:</Text>
-              <TextInput
-                style={loginStyles.inputText}
-                autoCapitalize='none'
-                autoCorrect={false}
-                textContentType='password'  
-                value={this.state.passwordCheckInput}
-                onChangeText={(text)=>{this.setState({passwordCheckInput: text})}}
-              />
-            </View>
-          ):(
-            <View/>
-          )}
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
-              <Text style={loginStyles.inputLabel}>Gender:</Text>
-              <TextInput
-                style={loginStyles.inputText}
-                autoCapitalize='none'
-                autoCorrect={false}
-                value={this.state.genderInput}
-                onChangeText={(text)=>{this.setState({genderInput: text})}}
-              />
-            </View>
-          ):(
-            <View/>
-          )}
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
-              <Text style={loginStyles.inputLabel}>Age:</Text>
-              <TextInput
-                style={loginStyles.inputText}
-                autoCapitalize='none'
-                autoCorrect={false}
-                value={this.state.ageInput}
-                onChangeText={(text)=>{this.setState({ageInput: text})}}
-              />
-            </View>
-          ):(
-            <View/>
-          )}
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
-              <Text style={loginStyles.inputLabel}>Weight:</Text>
-              <TextInput
-                style={loginStyles.inputText}
-                autoCapitalize='none'
-                autoCorrect={false}
-                value={this.state.weightInput}
-                onChangeText={(text)=>{this.setState({weightInput: text})}}
-              />
-            </View>
-          ):(
-            <View/>
-          )}
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
-              <Text style={loginStyles.inputLabel}>Height:</Text>
-              <TextInput
-                style={loginStyles.inputText}
-                autoCapitalize='none'
-                autoCorrect={false}
-                value={this.state.heightInput}
-                onChangeText={(text)=>{this.setState({heightInput: text})}}
-              />
-            </View>
-          ):(
-            <View/>
-          )}
-          {/* ActiveType tells you whether a user is active in sports
-              Implement a dropdown menu which user can select their types (accroding to the following fashion)
-              value: little or no exercise  ->  activeTypeInput: sedentary
-              value: light exercise/sports 1-3 days/week  ->  activeTypeInput: lightly active
-              value: moderate exercise/sports 3-5 days/week  ->  activeTypeInput: moderately active
-              value: hard exercise/sports 6-7 days a week  ->  activeTypeInput: very active
-              value: very hard exercise/sports & physical job or 2x training  ->  activeTypeInput: extra active
-
-          */}
-          {this.state.mode === 'create' ? (
-            <View style={loginStyles.inputRow}>
-              <Text style={loginStyles.inputLabel}>ActiveType:</Text>
-              <TextInput
-                style={loginStyles.inputText}
-                autoCapitalize='none'
-                autoCorrect={false}
-                value={this.state.activeTypeInput}
-                onChangeText={(text)=>{this.setState({activeTypeInput: text})}}
-              />
-            </View>
-          ):(
-            <View/>
-          )}
         </View>
         
-        {this.state.mode === 'login' ? (
 
-          <View style={loginStyles.bottomView}>
-            <TouchableOpacity 
-              style={loginStyles.buttonContainerLogIn}
-              onPress={this.onLogin}
+        <View style={loginStyles.bottomView}>
+          <TouchableOpacity 
+            style={loginStyles.buttonContainerLogIn}
+            onPress={this.onLogin}
+          >
+            <Text style={loginStyles.buttonTextLogIn}>Log In</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={loginStyles.buttonContainerSignUp}
+            onPress={()=>{
+              this.props.navigation.navigate("Signup", {
+                mode:'create'
+              })
+            }}
             >
-              <Text style={loginStyles.buttonTextLogIn}>Log In</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={loginStyles.buttonContainerSignUp}
-              onPress={()=>{
-                this.props.navigation.navigate("Signup", {
-                  mode:'create'
-                })
-              }}
-              >
-              <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
-            </TouchableOpacity>
- 
-          </View>
+            <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
+          </TouchableOpacity>
 
-        ):(
-
-          <View style={loginStyles.bottomView}>
-            <TouchableOpacity 
-              style={loginStyles.buttonContainer}
-              onPress={()=>{
-                this.setState({mode: 'login'})
-              }}
-              >
-              <Text style={loginStyles.buttonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={loginStyles.buttonContainer}
-              onPress={this.onCreateAccount}
-              >
-              <Text style={loginStyles.buttonText}>Create</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+        </View>
       </KeyboardAvoidingView>
     )
   }

@@ -105,16 +105,28 @@ export class RankingScreen extends React.Component {
             <FlatList
               ItemSeparatorComponent={()=>{
                 return (
-                  <View style={peopleStyles.separator}/>
+                  <View style={rankingStyles.separator}/>
                 );
               }}
               data={this.state.rankedList}
               renderItem={({item, index})=> {
                 index += 1;
                 return (
-                    <Text style={peopleStyles.personText}>
-                      {index + item[0] + ' ' + item[1] } 
+                  <View style={rankingStyles.content}>
+                    <Text style={rankingStyles.index}>
+                      {index} 
                     </Text>
+
+                    <View style={rankingStyles.data}>
+                      <Text style={rankingStyles.name}>
+                      {item[0]} 
+                      </Text>
+                      <Text style={rankingStyles.number}>
+                      {item[1]} <Text style={rankingStyles.steps}>Steps</Text>
+                      </Text>   
+                    </View>                  
+                  </View>                  
+
                 );
               }}
             />

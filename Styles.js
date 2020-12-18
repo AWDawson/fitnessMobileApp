@@ -60,6 +60,52 @@ export const rankingStyles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-start',
   },
+  separator:{
+    backgroundColor: "white",
+    height: 1,
+    width: '100%',
+    alignSelf: 'center'
+  },
+  content:{
+    paddingTop:10,
+    paddingBottom:10, 
+    flexDirection:"row",
+    width:"90%",
+    color:"white",
+    alignItems:"center",
+
+  },
+  index:{
+    marginLeft:20,
+    width:"10%",
+    color:"white",
+    fontSize: 20,
+    fontWeight: '600'
+
+  },
+  data:{
+    width:"90%",
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-between",
+    color:"white",
+  },
+  name:{
+    color:"white",
+    fontSize: 20,
+    fontWeight: '600'
+
+  },
+  number:{
+    color:"white",
+    fontSize: 30,
+    fontWeight: '600'
+  },
+  steps:{
+    color:"white",
+    fontSize: 15,
+    fontWeight: '500'
+  }
 
 })
 
@@ -249,10 +295,13 @@ export const loginStyles = StyleSheet.create({
       alignItems: 'center',
       width: '80%',
       backgroundColor: 'white',
-      opacity: 0.6,
+      opacity: 0.8,
       borderRadius:20,
       marginTop: 30,
       marginBottom: 10,
+      ...(Platform.OS !== 'android' && {
+        zIndex: 10
+      })
     },
       inputRow: {
         flexDirection: 'row',
@@ -260,20 +309,32 @@ export const loginStyles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 16,
         // borderBottomWidth: 2,
-        width: '90%',
+        width: '100%',
+        // borderColor: colors.exercise
+      },
+      inputRowSignUp: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingVertical: 13,
+        // borderBottomWidth: 2,
+        width: '100%',
+
         // borderColor: colors.exercise
       },
         inputLabelPic:{
           width: 35,
           height: 35,
-          // marginRight: 10,
+          marginLeft: 10,
         },
         inputLabel: {
           flex: 0.3,
           justifyContent: 'flex-end',
           paddingRight: 5,
           textAlign: 'right',
-          fontSize: 20
+          fontSize: 13,
+          fontWeight: '600',
+          color: colors.exercise
         },
         inputText: {
           flex: 0.8,
@@ -282,6 +343,17 @@ export const loginStyles = StyleSheet.create({
           borderBottomWidth: 1,
           fontSize: 18,
         },
+        inputTextSignUp: {
+          flex: 0.65,
+          height: 30,
+          borderColor: colors.outline,
+          // marginLeft: 0,
+          borderBottomWidth: 1,
+          fontSize: 13,
+          ...(Platform.OS !== 'android' && {
+            zIndex: 10
+          })
+        },
       bottomView: {
         marginBottom:30,
         flex:2,
@@ -289,7 +361,14 @@ export const loginStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
       },
-      buttonContainerLogIn: {
+      bottomViewSignUp:{
+        marginBottom:30,
+        flex:2,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+        buttonContainerLogIn: {
           justifyContent: 'center',
           alignItems: 'center',
           borderWidth: 3,
@@ -308,6 +387,26 @@ export const loginStyles = StyleSheet.create({
           height: 65,
           marginTop: 10,
         },
+        buttonContainerLogIn2: {
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderWidth: 3,
+          borderColor: 'white',
+          borderRadius: 50,
+          // backgroundColor: colors.primary,
+          width: 160,
+          height: 65
+        },
+        buttonContainerSignUp2: {
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 50,
+          backgroundColor: 'white',
+          width: 160,
+          height: 65,
+          marginLeft: 10,
+          zIndex: 1
+        },
         buttonTextLogIn: {
             textAlign: 'center',
             color: 'white',
@@ -318,7 +417,7 @@ export const loginStyles = StyleSheet.create({
             textAlign: 'center',
             color: colors.exercise,
             fontSize: 20,
-            fontWeight: 'bold'
+            fontWeight: 'bold',
           }
 });
 

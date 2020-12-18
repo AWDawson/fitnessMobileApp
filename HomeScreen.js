@@ -89,7 +89,9 @@ export class HomeScreen extends React.Component {
                         <TouchableOpacity 
                             style={homeStyles.listButton}
                             onPress={()=>{
-                                this.props.navigation.navigate("Record");                    
+                                this.props.navigation.navigate("Record",{
+                                mode: (this.state.mode === 'exercise' ? "exercise":"food")
+                              });                    
                             }}
                         >
                             <Text style={homeStyles.listButton}>
