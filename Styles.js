@@ -219,6 +219,7 @@ export const homeStyles = StyleSheet.create({
     },
     suggestionText:{
       color: 'white',
+      fontWeight: "600",
       fontSize: 16,
       opacity: 0.8
     },
