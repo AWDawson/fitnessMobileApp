@@ -184,7 +184,7 @@ class DataModel {
       this.currentUser = thisUser;
       Alert.alert(
         'Success',
-        'User profile is successfully created!',
+        'User profile is successfully updated!',
         [{ text: 'OK',style: 'OK'}]
       );
       return updatedUser;

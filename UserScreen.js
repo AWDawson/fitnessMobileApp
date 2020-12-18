@@ -87,9 +87,11 @@ export class UserScreen extends React.Component {
       this.state.weightInput,
       this.state.heightInput,
       this.state.activeTypeInput
-    );
+    ).then(()=>{
+      this.props.navigation.goBack();
+    });
 
-    this.props.navigation.goBack();                    
+                      
 
   }
 
