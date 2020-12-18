@@ -6,6 +6,9 @@ import { Pedometer } from 'expo-sensors';
 import AV from 'leancloud-storage/core';
 import * as adapters from '@leancloud/platform-adapters-react-native';
 import { config } from './leanCloudConfig'
+import {LogBox} from 'react-native';
+
+LogBox.ignoreAllLogs(true)
 
 export class RankingScreen extends React.Component {
     constructor(props) {

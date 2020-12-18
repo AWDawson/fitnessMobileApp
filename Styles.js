@@ -173,7 +173,7 @@ export const rankingStyles = StyleSheet.create({
     color:"white",
     fontSize: 18,
     fontWeight: '600',
-    width: 200,
+    width: 190,
   },
   number:{
     color:"white",

@@ -5,6 +5,9 @@ import { TextInput, Text, View,
 import { Ionicons } from '@expo/vector-icons';
 import { peopleStyles, colors, commonStyles, rankingStyles, homeStyles } from './Styles';
 import { getDataModel } from './DataModel';
+import {LogBox} from 'react-native';
+
+LogBox.ignoreAllLogs(true)
 
 export class RecordScreen extends React.Component {
   constructor(props) {
@@ -73,7 +76,7 @@ export class RecordScreen extends React.Component {
                               });                    
                             }}
                         >
-                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:30}}/> 
+                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:10}}/> 
                           </TouchableOpacity>
                         </View>
                       </View>
@@ -94,7 +97,7 @@ export class RecordScreen extends React.Component {
                               });                    
                             }}
                           >
-                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:30}}/> 
+                          <Ionicons name="ios-arrow-dropright" size={24} color="white" style={{paddingLeft:10}}/> 
                           </TouchableOpacity>
                         </View>
                       </View>        

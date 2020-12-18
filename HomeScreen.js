@@ -7,6 +7,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 import InsetShadow from 'react-native-inset-shadow'
 import { Pedometer } from 'expo-sensors';
+import {LogBox} from 'react-native';
+
+LogBox.ignoreAllLogs(true)
 
 
 export class HomeScreen extends React.Component {
