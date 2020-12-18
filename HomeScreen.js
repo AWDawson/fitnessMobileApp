@@ -62,7 +62,7 @@ export class HomeScreen extends React.Component {
                         We recommend you intake
                     </Text>
                     <Text style={homeStyles.suggestionText}>
-                        {this.state.suggestedCal} kCal per day.
+                        {Math.floor(this.dataModel.currentUser.recommendCalorie)} kCal per day.
                     </Text>
                 </View>
 
@@ -74,7 +74,7 @@ export class HomeScreen extends React.Component {
                     />
 
                     <Text style={homeStyles.meterValue}>
-                        100{this.state.calories}
+                        {Math.floor(this.dataModel.dailyStats[this.dataModel.currentUser.objectId].calorie)}
                     </Text>
 
                     <Text style={homeStyles.meterText}>
