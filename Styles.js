@@ -10,6 +10,48 @@ export const colors = {
   outline: '#BDBDBD' // MD Gray 400
 }
 
+export const detailStyles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor: colors.exercise,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    color: 'white'
+  },
+  icon:{
+    marginTop: 50,
+    width:200,
+    height:200
+  },
+  middle:{
+    // flex:1,
+    marginBottom: 15,
+    flexDirection: "column",
+    // justifyContent: "center",
+    alignItems: "center",
+  },
+  title:{
+    marginTop: 20,
+    color:"white",
+    fontSize:30,
+    fontWeight: "600"
+  },
+  value:{
+    flexDirection: "row",
+    alignItems: "baseline",
+    // marginBottom: 10,
+    color:"white",
+    fontSize: 60,
+    fontWeight: "600"
+  },
+  unit:{
+    color:"white",
+    fontSize: 25,
+    fontWeight: "600"
+  }
+
+})
+
 export const commonStyles = StyleSheet.create({
   commonContainer:{
     flex: 1,
