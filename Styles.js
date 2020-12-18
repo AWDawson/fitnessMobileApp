@@ -15,7 +15,7 @@ export const commonStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.exercise,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     color: 'white'
   },
   header:{
@@ -49,6 +49,35 @@ export const commonStyles = StyleSheet.create({
 
   },
 });
+
+export const searchStyles = StyleSheet.create({
+  optionList:{
+    width: '90%',
+    marginTop: 10,
+    flexWrap: "wrap",
+    flexDirection:'row',
+    alignItems:"center",
+    justifyContent:"flex-start"
+  },
+    option:{
+      width: "23%",
+      height: 100,
+      margin: "1%",
+      marginTop: 20,
+      // marginRight: "1%",
+      alignItems:"center",
+      justifyContent:"flex-start"
+    },
+      icon:{
+        width: 60,
+        height: 60
+      },
+      text:{
+        color:"white",
+        textAlign: "center",
+        fontWeight: "600"
+      }
+})
 
 
 export const rankingStyles = StyleSheet.create({
@@ -131,7 +160,7 @@ export const homeStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.food,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     color: 'white'
     // paddingTop: 80
   },

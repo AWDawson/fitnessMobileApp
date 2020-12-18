@@ -151,7 +151,7 @@ export class HomeScreen extends React.Component {
                 <TouchableOpacity 
                         style={homeStyles.addButton}
                         onPress={()=>{
-                            this.props.navigation.navigate("Add");                    
+                            this.props.navigation.navigate("Search",{mode: this.state.mode});                 
                         }}
                 >
                     <Image 
