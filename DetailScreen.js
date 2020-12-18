@@ -2,9 +2,11 @@ import React from 'react';
 import { TextInput, Text, View, 
     Image, TouchableOpacity, KeyboardAvoidingView, Alert} 
     from 'react-native';
-import { loginStyles} from './Styles';
+import { loginStyles,commonStyles,homeStyles,rankingStyles,detailStyles} from './Styles';
 import { getDataModel } from './DataModel';
 import { Ionicons } from '@expo/vector-icons';
+import {Icons} from './mapping'
+
 
 import { FlatList } from 'react-native-gesture-handler';
 import InsetShadow from 'react-native-inset-shadow'
@@ -69,40 +71,64 @@ export class DetailScreen extends React.Component {
 
   render() {
       return(
-          <KeyboardAvoidingView>
-              <View >
-              <View>
-                    <Text>{this.state.type}</Text>
+        <KeyboardAvoidingView 
+        behavior={'height'}
+        keyboardVerticalOffset={0}
+        style={this.state.mode === 'exercise' ? commonStyles.commonContainer:homeStyles.foodContainer}>
+
+
+              <View style={rankingStyles.header}>
+                  <Text style={commonStyles.headerText}>
+                      {this.state.type}
+                  </Text>
+                  <TouchableOpacity
+                      style={commonStyles.headerLeftIcon}
+                      onPress={()=>{
+                          this.props.navigation.navigate("Home");                    
+                      }}
+                  >
+                    <Image
+                      source={require('./assets/back.png')}
+                      style={commonStyles.headerLeftIcon}
+                    />           
+                  </TouchableOpacity>
               </View>
 
-              <View >
-                <Text>{this.state.mode === 'exercise' ? 'Time' : 'Quantity'}</Text>
-                <TextInput
-                   
-                    autoCapitalize='none'
-                    autoCorrect={false}
-                    value={this.state.amount}
-              onChangeText={(text)=>{this.computeCalories(text);}}
-                />
-            </View>
+              <Image 
+                  source={Icons[this.record.ExerciseId.objectId]}
+                  style={detailStyles.icon}
+              />    
+
+
+              <View style={detailStyles.middle}>
+                <Text style={detailStyles.title}>{this.state.mode === 'exercise' ? 'Duration' : 'Quantity'}</Text>
+                <View style={detailStyles.value}>
+                  <TextInput style={detailStyles.value}
+                      autoCapitalize='none'
+                      autoCorrect={false}
+                      value={this.state.amount}
+                      onChangeText={(text)=>{this.computeCalories(text);}}
+                  />
+                  {this.state.mode === 'exercise' ? <Text style={detailStyles.unit}>  min</Text> : ''}
+                </View>
+
+                <Text style={detailStyles.title}>{this.state.mode === 'exercise' ? 'Total Consumption' : 'Total Intake'}</Text>
                 <View>
-                    <Text>{this.state.mode === 'exercise' ? 'Total Consumption' : 'Total Intake'}</Text>
-              </View>
-              <View>
-                    <Text>{this.state.calories} kCal</Text>
+                  <Text style={detailStyles.value}>{this.state.calories}<Text style={detailStyles.unit}>  kCal</Text></Text>
+                </View>
               </View>
 
-            </View>
-        <View >
-          <TouchableOpacity 
-            
-            onPress={this.updateRecord}
-            >
-            <Text >Save</Text>
-          </TouchableOpacity>
 
-        </View>
-          </KeyboardAvoidingView>
+              <TouchableOpacity 
+                style={loginStyles.buttonContainerSignUp}
+                onPress={this.updateRecord}
+                >
+                <Text style={loginStyles.buttonTextSignUp}>Save</Text>
+              </TouchableOpacity>
+
+
+
+        </KeyboardAvoidingView>
       )
 
   }
