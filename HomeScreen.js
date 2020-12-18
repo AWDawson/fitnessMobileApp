@@ -17,7 +17,7 @@ export class HomeScreen extends React.Component {
       mode: 'exercise',
       calories: '',
       suggestedCal: '',
-      recordList: [],
+      recordList: Object.values(this.dataModel.exerciseRecords),
     }
   }
 
@@ -99,9 +99,47 @@ export class HomeScreen extends React.Component {
                     </View>
 
                     <View style={homeStyles.listContainer}>
-                        <FlatList>
-
-                        </FlatList>
+                        <FlatList
+                            ItemSeparatorComponent={()=>{
+                                return (
+                                    <View style={peopleStyles.separator}/>
+                                );
+                                }}
+                                data={this.state.recordList}
+                                renderItem={({item})=> {
+                                if (this.state.mode === 'exercise'){
+                                    return (
+                                    <TouchableOpacity 
+                                        style={peopleStyles.personRow}
+                                        onPress={()=> {
+                                            this.setState({mode : 'food',
+                                            records: Object.values(this.dataModel.foodRecords)});
+                                        }}
+                                    >
+                                        <Text style={peopleStyles.personText}>{
+                                        this.dataModel.exercises[item.ExerciseId.objectId].Type + "   Duration: " + item.Duration + "min" 
+                                        }</Text>
+                                        <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
+                                    </TouchableOpacity>
+                                    );
+                                } else {
+                                    return (
+                                    <TouchableOpacity 
+                                        style={peopleStyles.personRow}
+                                        onPress={()=> {
+                                            this.setState({mode : 'exercise',
+                                            records: Object.values(this.dataModel.exerciseRecords)});
+                                        }}
+                                    >
+                                        <Text style={peopleStyles.personText}>{
+                                        this.dataModel.foods[item.FoodId.objectId].Type + "  Quantity: " + item.Quantity + ""
+                                        }</Text>
+                                        <Ionicons name="ios-arrow-dropright" size={24} color="black"/>                
+                                    </TouchableOpacity>
+                                    );
+                                }
+                            }}
+                        />
                     </View>
                 </View>
 
