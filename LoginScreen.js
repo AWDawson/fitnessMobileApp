@@ -102,6 +102,22 @@ export class LoginScreen extends React.Component {
     var end = new Date();
     end.setHours(23,59,59,999);
 
+    let recordExists = this.dataModel.currentUser.objectId in this.dataModel.dailyStats;
+    if(!recordExists){
+      console.log("Record not found");
+      let dailyRecord = new AV.Object('Daily_Stats');
+          // 'user' is a pointer that points to the current user
+      let user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
+      dailyRecord.set('user', user);
+      dailyRecord.set('date', String(start));
+      dailyRecord.set('steps', 0);
+      dailyRecord.set('calorie', 0);
+      await dailyRecord.save();
+      console.log("dailyRecord saved");
+      let record = dailyRecord.toJSON();
+      this.dataModel.dailyStats[this.dataModel.currentUser.objectId] = record;
+    }
+
     // get step count
     Pedometer.getStepCountAsync(start, end).then(
       result => {
@@ -205,26 +221,26 @@ export class LoginScreen extends React.Component {
         </View>
         
 
-        <View style={loginStyles.bottomView}>
-          <TouchableOpacity 
-            style={loginStyles.buttonContainerLogIn}
-            onPress={this.onLogin}
-          >
-            <Text style={loginStyles.buttonTextLogIn}>Log In</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={loginStyles.buttonContainerSignUp}
-            onPress={()=>{
-              this.props.navigation.navigate("Signup", {
-                mode:'create'
-              })
-            }}
+          <View style={loginStyles.bottomView}>
+            <TouchableOpacity 
+              style={loginStyles.buttonContainerLogIn}
+              onPress={this.onLogin}
             >
-            <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
-          </TouchableOpacity>
-
-        </View>
+              <Text style={loginStyles.buttonTextLogIn}>Log In</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={loginStyles.buttonContainerSignUp}
+              onPress={()=>{
+                this.props.navigation.navigate("Signup", {
+                  mode:'create'
+                })
+              }}
+              >
+              <Text style={loginStyles.buttonTextSignUp}>Sign Up</Text>
+            </TouchableOpacity>
+ 
+          </View>
       </KeyboardAvoidingView>
     )
   }

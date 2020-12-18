@@ -25,6 +25,8 @@ export class RankingScreen extends React.Component {
     getList = async () => {
       await this.dataModel.loadDailyStats();
       this.setState({rankedList : this.dataModel.getRankedList()});
+      // console.log('ranked',rankedList);
+
     }
 
     componentDidMount() {
@@ -47,6 +49,7 @@ export class RankingScreen extends React.Component {
             if (ifRecordExists) {
                 // update steps in local data model
                 this.dataModel.dailyStats[this.dataModel.currentUser.objectId].steps = result.steps;
+                // console.log(this.dataModel.dailyStats[this.dataModel.currentUser.objectId].steps)
                 // fetch the record
                 console.log("Record found");
                 var user = AV.Object.createWithoutData('_User', this.dataModel.currentUser.objectId);
