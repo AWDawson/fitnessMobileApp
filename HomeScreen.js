@@ -32,7 +32,8 @@ export class HomeScreen extends React.Component {
   }
 
   onFocus = () => {
-    this.setState({records:Object.values(this.dataModel.exerciseRecords)});
+    this.setState({records: this.state.mode === 'exercise' ? 
+        Object.values(this.dataModel.exerciseRecords) : Object.values(this.dataModel.foodRecords)});
   }
 
 
@@ -162,7 +163,10 @@ export class HomeScreen extends React.Component {
                 <TouchableOpacity 
                         style={homeStyles.addButton}
                         onPress={()=>{
-                            this.props.navigation.navigate("Add");                    
+                            this.props.navigation.navigate("Add", {
+                                mode : this.state.mode,
+                                type : this.state.mode === 'exercise' ? 'Tennis' :  'Apple'
+                            });                    
                         }}
                 >
                     <Image 
