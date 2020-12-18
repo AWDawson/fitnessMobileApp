@@ -257,8 +257,8 @@ class DataModel {
    */
   getRankedList = () => {
     // convert this.dailyStats to array and then sort based on steps
-    this.loadDailyStats();
     var sortable = [];
+    console.log(this.dailyStats);
     for (var id in this.dailyStats) {
       var userId = this.dailyStats[id].user.objectId;
       var username = this.users[userId].username;
@@ -392,6 +392,7 @@ class DataModel {
     item.set('calorie',calories);
     await item.save().then((record) => {
       let i = record.toJSON();
+      console.log(i);
       this.dailyStats[this.currentUser.objectId] = i;
     });
   }

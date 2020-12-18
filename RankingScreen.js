@@ -12,11 +12,16 @@ export class RankingScreen extends React.Component {
       super(props);
   
       this.dataModel = getDataModel();
-  
       this.state = {
-        rankedList: this.dataModel.getRankedList()
+        rankedList: []
         // rankedList: [],
       }
+      this.getList();
+    }
+
+    getList = async () => {
+      await this.dataModel.loadDailyStats();
+      this.setState({rankedList : this.dataModel.getRankedList()});
     }
 
     componentDidMount() {
@@ -70,8 +75,8 @@ export class RankingScreen extends React.Component {
             // );
             }
         );
-        this.dataModel.loadDailyStats();
-        this.setState({rankedList: this.dataModel.getRankedList()});
+        
+        this.getList();
     }
 
     // componentWillUnmount() {
