@@ -3,7 +3,7 @@ import { TextInput, Text, View,
   FlatList, TouchableOpacity, Alert, Image} 
   from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { peopleStyles, colors, commonStyles, rankingStyles } from './Styles';
+import { peopleStyles, colors, commonStyles, rankingStyles, homeStyles } from './Styles';
 import { getDataModel } from './DataModel';
 
 export class RecordScreen extends React.Component {
