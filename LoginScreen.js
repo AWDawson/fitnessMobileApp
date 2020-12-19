@@ -76,6 +76,8 @@ export class LoginScreen extends React.Component {
       // 登录成功
       console.log("Login Success");
       this.dataModel.currentUser = user.toJSON();
+      this.dataModel.foodRecords = {};
+      this.dataModel.exerciseRecords = {};
       console.log(user);
       return true;
     }, (error) => {
